@@ -1,0 +1,658 @@
+@font-face {
+    font-family: "SegoeFlunetIcons";
+    src: url("./SegoeIcons.ttf");
+}
+
+@font-face {
+    font-family: "JetBrainsMono";
+    src: url("./JetBrainsMono.ttf");
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 44px;
+    color: var(--text-color)
+}
+
+#content {
+    width: 100%;
+    max-width: 800px;
+    opacity: 0;
+    transition: all 0.15s ease-in-out 0.35s;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    border: unset;
+    resize: unset;
+    margin: 0;
+    margin-left: -8px;
+    padding: 26px 8px 7px 8px;
+    /* border-radius: 6px; */
+    font-family: system-ui;
+    /* background: transparent; */
+    position: sticky;
+    top: 44px;
+    z-index: 1000;
+    outline: none;
+}
+
+#fontFeatures {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.feature-title {
+    margin-top: -32px;
+    font-weight: normal;
+    margin-bottom: 18px;
+    width: 100%;
+    user-select: none;
+}
+
+.feature-title h3 {
+    font-weight: normal;
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.feature-title span {
+    font-weight: normal;
+    font-size: 13px;
+    opacity: 0.5;
+    margin: 0;
+}
+
+.info-title {
+    font-weight: normal;
+    margin-bottom: 18px;
+    width: 100%;
+    user-select: none;
+}
+
+.info-title h3 {
+    font-weight: normal;
+    font-size: 20px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.info-title span {
+    font-weight: normal;
+    font-size: 13px;
+    opacity: 0.5;
+    margin: 0;
+}
+
+.feature-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+    width: 196px;
+}
+
+.feature-control label {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+    height: 28px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(100% - 10px);
+    justify-content: space-between;
+    transition: all 0.25s ease-in-out;
+}
+
+.feature-control input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 196px;
+    height: 28px;
+    border: solid 1px var(--text-color-25);
+    position: absolute;
+    margin: 0;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+.feature-control input[type="checkbox"]:checked {
+    background-color: var(--text-color-25);
+}
+
+.feature-control input[type="checkbox"]::after {
+    content: "";
+    opacity: 0;
+    margin-left: -8px;
+    font-family: "SegoeFlunetIcons";
+    font-size: 16px;
+    top: 5px;
+    transition: all 0.15s ease-in-out;
+    position: relative;
+}
+
+.feature-control input[type="checkbox"]:checked::after {
+    opacity: 1;
+    margin-left: 5px;
+}
+
+.feature-control input[type="checkbox"]:checked+label {
+    padding-left: 28px;
+    width: calc(100% - 33px);
+}
+
+.featureName {
+    display: flex;
+    padding: 0;
+    padding-right: 2px;
+    width: fit-content;
+    font-size: 13px;
+    font-family: "JetBrainsMono";
+    opacity: 0;
+    transition: all 0.15s ease-in-out;
+}
+
+.feature-control:hover label .featureName {
+    opacity: 1;
+}
+
+#variableAxes {
+    margin-top: 10px;
+}
+
+.axis-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.axis-control label {
+    min-width: 100px;
+}
+
+.axis-control input[type="range"] {
+    margin: 0 10px;
+}
+
+.axis-min,
+.axis-max {
+    font-size: 0.8em;
+    color: var(--text-color-50);
+}
+
+#color-picker {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+}
+
+header {
+    height: 44px;
+    width: calc(100% - 68px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--text-color-25);
+    -webkit-app-region: drag;
+    display: flex;
+    flex-direction: row;
+    padding-left: 52px;
+    padding-right: 16px;
+    align-items: center;
+    backdrop-filter: blur(50px);
+    z-index: 998;
+    opacity: 0;
+    margin-top: -44px;
+    transition: all 0.2s ease-in-out 0.35s;
+    display: flex;
+    justify-content: space-between;
+}
+
+header svg path {
+    fill: var(--text-color-50)
+}
+
+input#fontFile {
+    display: flex;
+    align-items: center;
+    width: 1px;
+    height: 1px;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    -webkit-app-region: no-drag;
+    opacity: 0;
+}
+
+.fileUploadLabel {
+    display: flex;
+    align-items: center;
+    width: 45px;
+    height: 44px;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    -webkit-app-region: no-drag;
+    opacity: 1;
+    font-family: SegoeFlunetIcons;
+    font-size: 14px;
+    transition: all .15s ease-in-out;
+    user-select: none;
+    z-index: 999;
+}
+
+.fileUploadLabel:hover {
+    background: var(--text-color-25);
+}
+
+p#loadedFontName {
+    margin: 0;
+    font-family: system-ui !important;
+    font-size: 14px;
+    user-select: none;
+}
+
+#fontSelect {
+    transform: scale(0);
+    opacity: 0;
+}
+
+#fontColor {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    width: 18px;
+    height: 8px;
+    border-radius: 1px;
+    background-color: transparent;
+    cursor: pointer;
+    inline-size: 16px;
+    block-size: 6px;
+    padding: 0;
+    box-sizing: unset;
+    overflow-clip-margin: 0px !important;
+    overflow: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-rtl-ordering: unset;
+    margin: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    outline: 0;
+    position: relative;
+    left: -36px;
+    top: 6px;
+    z-index: -1;
+}
+
+#fontColor::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+#fontColor::-webkit-color-swatch {
+    border: none;
+    border-radius: 1px;
+}
+
+#forFontColor {
+    padding-left: 5px;
+    margin-right: -1px;
+    padding-top: 1px;
+    margin-bottom: 1px;
+    max-height: 32px;
+    padding-right: 18px;
+    border: solid 1px var(--text-color-50);
+    border-radius: 6px;
+    transition: all 0.1s ease-in-out;
+}
+
+#forFontColor:hover {
+    border: solid 1px var(--text-color-75);
+}
+
+#forFontColor::after {
+    content: '';
+    font-family: "SegoeFlunetIcons";
+    font-size: 10px;
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 2px;
+}
+
+#forFontColor::before {
+    content: '';
+    background: var(--text-color-25);
+    width: 44.6px;
+    display: block;
+    height: 33.6px;
+    position: absolute;
+    z-index: -10;
+    margin-top: -1px;
+    margin-left: -6px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+#forFontColor:hover::before {
+    opacity: 0.75;
+}
+
+#forBgColor {
+    padding-left: 5px;
+    margin-right: -1px;
+    padding-top: 1px;
+    margin-bottom: 1px;
+    max-height: 32px;
+    padding-right: 18px;
+    border: solid 1px var(--text-color-50);
+    border-radius: 6px;
+    transition: all 0.1s ease-in-out;
+    font-family: "SegoeFlunetIcons";
+    font-size: 20px;
+    margin-left: -10px;
+}
+
+#forBgColor:hover {
+    border: solid 1px var(--text-color-75);
+}
+
+#forBgColor::after {
+    content: '';
+    font-family: "SegoeFlunetIcons";
+    font-size: 10px;
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 4px;
+}
+
+#forBgColor::before {
+    content: '';
+    background: var(--text-color-25);
+    width: 44.6px;
+    display: block;
+    height: 33.6px;
+    position: absolute;
+    z-index: -10;
+    margin-top: -1px;
+    margin-left: -6px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+#forBgColor:hover::before {
+    opacity: 0.75;
+}
+
+#bgColor {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 22px;
+    background-color: transparent;
+    cursor: pointer;
+    inline-size: 19px;
+    block-size: 19px;
+    padding: 0;
+    box-sizing: unset;
+    overflow-clip-margin: 0px !important;
+    overflow: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-rtl-ordering: unset;
+    margin: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    outline: 0;
+    position: relative;
+    left: -37px;
+    top: 0px;
+    z-index: -1;
+}
+
+#bgColor::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+#bgColor::-webkit-color-swatch {
+    border: none;
+    border-radius: 1px;
+}
+
+#forFontSize {
+    margin-left: 6px;
+    z-index: 8;
+}
+
+#forFontColor,
+#forFontSize {
+    font-family: "SegoeFlunetIcons";
+    font-size: 20px;
+}
+
+@-moz-document url-prefix() {
+    #forFontColor {
+        margin-top: 2px;
+    }
+
+    #forFontSize {
+        margin-top: 5px;
+    }
+
+    #fontColor {
+        margin-top: -1px;
+    }
+
+    #forBgColor {
+        margin-top: 1px;
+    }
+
+    #forBgColor::after {
+        margin-top: 10px;
+    }
+
+    #bgColor {
+        margin-top: -2px;
+    }
+}
+
+/* input#fontSize {
+            pointer-events: none;
+        } */
+
+#fontSize {
+    height: 33px;
+    margin: 0;
+    padding-top: 0 !important;
+    padding-inline: unset;
+    padding-block: unset;
+    padding-bottom: 0 !important;
+    border-radius: 6px;
+    padding-left: 34px;
+    margin-left: -26px;
+    margin-right: 5px;
+    width: 48px;
+    font-family: 'JetBrainsMono';
+    font-size: 14px;
+    border: solid 1px var(--text-color-50);
+    background: transparent;
+    color: var(--text-color);
+    transition: all 0.1s ease-in-out;
+    outline: none;
+}
+
+#fontSize:hover {
+    background: var(--text-color-25);
+}
+
+.fileUploadLabelBtn {
+    padding: 1px 12px 6px 10px;
+    background: transparent;
+    border-radius: 6px;
+    border: solid 1px var(--text-color-25);
+    border-bottom: solid 2px var(--text-color-25);
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+    margin-top: 20px;
+}
+
+.fileUploadLabelBtn::before {
+    content: '';
+    font-family: "SegoeFlunetIcons";
+    font-size: 17px;
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.fileUploadLabelBtn:hover::before {
+    opacity: 0;
+}
+
+.fileUploadLabelBtn:hover {
+    background: var(--text-color-25);
+    border: solid 1px var(--text-color-50);
+    border-bottom: solid 2px var(--text-color-50);
+}
+
+.fileUploadLabelBtn::after {
+    content: '';
+    font-family: "SegoeFlunetIcons";
+    transition: all 0.25s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    margin-top: 3px;
+    margin-left: -106px;
+    font-size: 17px;
+}
+
+.fileUploadLabelBtn:hover::after {
+    opacity: 1;
+}
+
+#welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    z-index: 1001;
+    top: calc(50% - 128px);
+    color: var(--text-color);
+    opacity: 1;
+    transition: all 0.15s ease-in-out 0.35s;
+}
+
+#welcome code {
+    font-family: 'JetBrainsMono';
+    background: var(--text-color-25);
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    user-select: none;
+}
+
+#welcome span {
+    user-select: none;
+}
+
+#welcome h1 {
+    user-select: none;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+#welcome p {
+    user-select: none;
+    margin: 0;
+    margin-bottom: 6px;
+}
+
+#welcome .icon {
+    font-family: "SegoeFlunetIcons";
+    font-size: 38px;
+    margin-bottom: -12px;
+}
+
+#welcome footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 24px;
+    opacity: 0.5;
+}
+
+#welcome footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+#welcome footer svg path {
+    fill: var(--text-color)
+}
+
+.whgtinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #0F5D7D;
+    background: #D5F3FF;
+    padding: 7px 10px 7px 12px;
+    gap: 6px;
+    border-radius: 6px;
+    width: 100%;
+    margin-left: -8px;
+    user-select: none;
+}
+
+.whgtinfo .icon {
+    font-family: "SegoeFlunetIcons";
+    font-size: 18px;
+    margin-top: 1px;
+}
+
+.whgtinfo p {
+    font-family: system-ui;
+    font-size: 14px;
+    margin: 0;
+}
+
+#font-info code {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'JetBrainsMono', system-ui;
+    font-size: 14px;
+    line-height: 25px;
+}

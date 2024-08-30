@@ -1,0 +1,10 @@
+/node_modules
+/yarn.lock
+/out
+/orionMark
+/orionMark.ism
+/test.html
+/package.json
+/main.json
+/icon.icns
+/icon.ico
