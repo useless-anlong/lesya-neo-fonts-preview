@@ -172,6 +172,7 @@ textarea {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
+    padding-top: 64px;
 }
 
 #fontPreview {
@@ -180,6 +181,7 @@ textarea {
     align-items: flex-start;
     margin-top: 44px;
     overflow-x: scroll;
+    padding-top: 64px;
 }
 
 #fontPreview span {
@@ -197,11 +199,11 @@ textarea {
     height: 172px;
     text-align: right;
     color: var(--text-color-50);
-    /* background: var(--text-color-25); */
+    background: var(--size-color-bg);
     user-select: none;
     position: absolute;
     margin-left: -8px;
-    /* left: -8px; */
+    padding-right: 8px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -260,6 +262,7 @@ textarea {
 .feature-title {
     font-weight: normal;
     margin-bottom: 18px;
+    margin-top: -64px;
     width: 100%;
     user-select: none;
 }
