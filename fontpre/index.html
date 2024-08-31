@@ -7,19 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>字体预览 & 测试 - Lesya Neo 工具集</title>
     <link rel="stylesheet" type="text/css" href="./style/main.css">
+    <link rel="icon" type="image/png" href="../icon.png">
 </head>
 
 <body>
     <header>
         <label for="fontFile" class="fileUploadLabel" title="加载字体"></label>
         <p id="loadedFontName"></p>
-
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
-            height="12" viewBox="0 0 555 192">
-            <path
-                d="M32,0L0,0L0,192L32,192L32,80L64,80L64,112L96,112L96,144L128,144L128,192L160,192L160,0L128,0L128,112L96,112L96,80L64,80L64,48L32,48L32,0ZM212,0L353,0L353,32L244,32L244,160L353,160L353,192L212,192L212,0ZM427,0L523,0L523,32L427,32L427,0ZM427,160L395,160L395,32L427,32L427,160ZM523,160L523,32L555,32L555,160L523,160ZM523,160L427,160L427,192L523,192L523,160ZM321,80L276,80L276,112L321,112L321,80Z"
-                fill-rule="evenodd" fill-opacity="1" />
-        </svg>
+        <button class="goback" title="返回到 Neo 工具集首页">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
+                height="12" viewBox="0 0 555 192">
+                <path
+                    d="M32,0L0,0L0,192L32,192L32,80L64,80L64,112L96,112L96,144L128,144L128,192L160,192L160,0L128,0L128,112L96,112L96,80L64,80L64,48L32,48L32,0ZM212,0L353,0L353,32L244,32L244,160L353,160L353,192L212,192L212,0ZM427,0L523,0L523,32L427,32L427,0ZM427,160L395,160L395,32L427,32L427,160ZM523,160L523,32L555,32L555,160L523,160ZM523,160L427,160L427,192L523,192L523,160ZM321,80L276,80L276,112L321,112L321,80Z"
+                    fill-rule="evenodd" fill-opacity="1" />
+            </svg>
+        </button>
     </header>
     <div id="content">
         <input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2">
@@ -48,7 +50,6 @@
         <div id="fontPreview">
             <div class="feature-title">
                 <h3>固定字号对比预览</h3>
-                <span>你仍可通过滑块调整字重，但复选框中的 OpenType 特性在此不会生效。</span>
             </div>
             <span>
                 <div class="size">8</div>

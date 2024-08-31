@@ -812,7 +812,19 @@ p#loadedFontName {
     font-family: "SegoeFlunetIcons";
     font-size: 38px;
     margin-bottom: -12px;
-    color: #46a5cc;
+    color: transparent;
+    background-image: url(./smilebg.png);
+    background-size: 24px;
+    background-position: center;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    background-clip: text;
 }
 
 #welcome footer {
@@ -877,4 +889,28 @@ p#loadedFontName {
     color: rgb(0, 0, 0);
     font-feature-settings: normal;
     font-variation-settings: normal;
+}
+
+.goback {
+    display: flex;
+    align-items: center;
+    width: 70px;
+    height: 44px;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    -webkit-app-region: no-drag;
+    opacity: 1;
+    font-family: SegoeFlunetIcons;
+    font-size: 14px;
+    transition: all .15s ease-in-out;
+    user-select: none;
+    z-index: 999;
+    background: transparent;
+    border: none;
+}
+
+.goback:hover {
+    background: var(--text-color-25);
 }

@@ -191,13 +191,13 @@ async function loadFontInfo(file) {
                 info += `  - ${axis.tag}: 由 ${axis.minValue}, 至 ${axis.maxValue}, 默认为 ${axis.defaultValue}<br></code>`;
             });
         } else {
-            info += `字重: ${weightClass} <div class="whgtinfo"><span class="icon"></span><p>此字体不支持可变字重。</p></div><br>`;
+            info += `字重: ${weightClass} <div class="whgtinfo"><span class="icon"></span><p>此字体不支持可变字重。</p></div>`;
         }
 
         fontInfoDiv.innerHTML = info;
     } catch (error) {
         console.error('Error loading font:', error);
-        fontInfoDiv.textContent = '读取字体文件信息表时出错' + error.message;
+        fontInfoDiv.innerHTML = `<div class="whgtinfo"><span class="icon"></span><p>读取字体文件信息表时出错: ${error.message}</p></div>`;
     }
 }
 
@@ -244,8 +244,6 @@ async function checkFontFeatures(fontName) {
             const div = document.createElement('div');
             div.className = 'axis-control';
 
-            // <span class="featureName">${axis.tag}</span>
-
             div.innerHTML = `
                 <label for="${axis.tag}" title="${featureDescriptions[axis.tag] || axis.tag}">${featureDescriptions[axis.tag] || axis.name.en || axis.tag} </label>
                 <span class="axis-min">${Math.round(axis.minValue)}</span>
@@ -267,9 +265,10 @@ async function checkFontFeatures(fontName) {
         });
     }
 
-    // if (e.target.files.length > 0) {
-    //     loadFontInfo(e.target.files[0]);
-    // }
+    // 保存字体轴信息到全局变量，以便在其他地方使用
+    window.fontAxes = font.tables.fvar ? font.tables.fvar.axes : null;
+
+    updateTextStyle(); // 初始化时调用一次
 }
 
 function hexToRgb(hex) {
@@ -332,93 +331,63 @@ function updateTextStyle() {
 
     const wghtInput = document.getElementById('wght');
     const opszInput = document.getElementById('opsz');
-    if (wghtInput && opszInput) {
-        const wghtValue = parseFloat(wghtInput.value);
-        let opszValue = parseFloat(size);
+    if (wghtInput && opszInput && window.fontAxes) {
+        const wghtAxis = window.fontAxes.find(axis => axis.tag === 'wght');
+        const opszAxis = window.fontAxes.find(axis => axis.tag === 'opsz');
 
-        if (wghtValue > 600) {
-            opszValue *= 0.8;
-        } else if (wghtValue < 300) {
-            opszValue *= 1.2;
+        if (wghtAxis && opszAxis) {
+            const wghtValue = parseFloat(wghtInput.value);
+            let opszValue = parseFloat(size);
+
+            const wghtRange = wghtAxis.maxValue - wghtAxis.minValue;
+            if (wghtValue > wghtAxis.minValue + wghtRange * 0.75) {
+                opszValue *= 0.8;
+            } else if (wghtValue < wghtAxis.minValue + wghtRange * 0.25) {
+                opszValue *= 1.2;
+            }
+
+            // 确保 opszValue 在允许的范围内
+            opszValue = Math.max(opszAxis.minValue, Math.min(opszAxis.maxValue, opszValue));
+
+            opszInput.value = opszValue;
+            opszInput.nextElementSibling.nextElementSibling.textContent = Math.round(opszValue);
+            fontVariationSettings = fontVariationSettings.replace(/("opsz" )\d+(\.\d+)?/, `$1${opszValue}`);
         }
-
-        opszInput.value = opszValue;
-        opszInput.nextElementSibling.nextElementSibling.textContent = Math.round(opszValue);
-        fontVariationSettings = fontVariationSettings.replace(/("opsz" )\d+/, `$1${opszValue}`);
     }
 
-    testText.style.fontFamily = selectedFont;
+    const applyStyle = (element) => {
+        element.style.fontFamily = selectedFont;
+        element.style.color = color;
+        element.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+        element.style.fontVariationSettings = fontVariationSettings || 'normal';
+    };
+
     testText.style.fontSize = `${size}px`;
-    testText.style.color = color;
-    testText.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    testText.style.fontVariationSettings = fontVariationSettings || 'normal';
+    applyStyle(testText);
 
-    // 修改固定字号测试文本颜色
-    sizeTestText8.style.color = color;
-    sizeTestText12.style.color = color;
-    sizeTestText16.style.color = color;
-    sizeTestText24.style.color = color;
-    sizeTestText32.style.color = color;
-    sizeTestText48.style.color = color;
-    sizeTestText64.style.color = color;
-    sizeTestText72.style.color = color;
-    sizeTestText128.style.color = color;
-
-    // 修改固定字号测试文本字体
-    sizeTestText8.style.fontFamily = selectedFont;
-    sizeTestText12.style.fontFamily = selectedFont;
-    sizeTestText16.style.fontFamily = selectedFont;
-    sizeTestText24.style.fontFamily = selectedFont;
-    sizeTestText32.style.fontFamily = selectedFont;
-    sizeTestText48.style.fontFamily = selectedFont;
-    sizeTestText64.style.fontFamily = selectedFont;
-    sizeTestText72.style.fontFamily = selectedFont;
-    sizeTestText128.style.fontFamily = selectedFont;
-
-    // 修改固定字号测试文本特性选项
-    sizeTestText8.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText12.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText16.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText24.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText32.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText48.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText64.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText72.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-    sizeTestText128.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-
-    // 修改固定字号测试文本可变选项数值
-    sizeTestText8.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText12.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText16.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText24.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText32.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText48.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText64.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText72.style.fontVariationSettings = fontVariationSettings || 'normal';
-    sizeTestText128.style.fontVariationSettings = fontVariationSettings || 'normal';
+    // 修改固定字号测试文本样式
+    [sizeTestText8, sizeTestText12, sizeTestText16, sizeTestText24, sizeTestText32,
+        sizeTestText48, sizeTestText64, sizeTestText72, sizeTestText128].forEach(applyStyle);
 
     bgColor.addEventListener('change', function () {
         const selectedColor = this.value;
-        body.style.backgroundColor = this.value
-        testText.style.backgroundColor = this.value
+        body.style.backgroundColor = selectedColor;
+        testText.style.backgroundColor = selectedColor;
         const rgbColor = hexToRgb(selectedColor);
         const luminance = getLuminance(rgbColor);
 
-        changeSizeBGVariable(this.value)
-        // console.log('明度：', luminance);
+        changeSizeBGVariable(selectedColor);
 
         if (luminance < 0.5) {
             changeColorVariable('#ffffff');
             change75Variable('rgba(255, 255, 255, 0.75)');
             change50Variable('rgba(255, 255, 255, 0.5)');
             change25Variable('rgba(255, 255, 255, 0.25)');
-            // console.log('文字颜色：白色')
         } else {
             changeColorVariable('#000000');
             change75Variable('rgba(0, 0, 0, 0.5)');
             change50Variable('rgba(0, 0, 0, 0.35)');
             change25Variable('rgba(0, 0, 0, 0.1)');
-            // console.log('文字颜色：黑色')
         }
     });
 }
@@ -477,7 +446,7 @@ function scrollToTop() {
 }
 
 // 在页面加载完成后调用 scrollToTop 函数和 adjustMargin 函数
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     scrollToTop();
     adjustMargin();
 });
