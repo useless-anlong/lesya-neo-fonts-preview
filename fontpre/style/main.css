@@ -1,11 +1,11 @@
 @font-face {
     font-family: "SegoeFlunetIcons";
-    src: url("./SegoeIcons.ttf");
+    src: url("../../fonts/SegoeIcons.ttf");
 }
 
 @font-face {
     font-family: "JetBrainsMono";
-    src: url("./JetBrainsMono.ttf");
+    src: url("../../fonts/JetBrainsMono.ttf");
 }
 
 body {
@@ -17,7 +17,128 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 44px;
-    color: var(--text-color)
+    color: var(--text-color);
+    overflow-y: hidden;
+}
+
+.axis-control {
+    width: 300px;
+    position: relative;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.axis-control label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.axis-control input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: calc(100% - 40px);
+    height: 18px;
+    border-radius: 4px;
+    background: transparent;
+    outline: 2px;
+    border: 1px solid var(--text-color-25);
+    margin: 0;
+    padding: 4px;
+    transition: all 0.15s ease-in-out;
+}
+
+.axis-control input[type="range"]:hover {
+    background: var(--text-color-25);
+}
+
+.axis-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text-color-75);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.axis-control input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text-color-75);
+    cursor: pointer;
+    border: none;
+}
+
+.axis-control input[type="range"]#opsz::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text-color-50);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.axis-control input[type="range"]#opsz::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text-color-50);
+    cursor: pointer;
+    border: none;
+}
+
+.axis-control input[type="range"]#opsz:hover {
+    background: transparent;
+}
+
+.axis-min,
+.axis-max {
+    position: absolute;
+    top: 64px;
+    width: 36px;
+    height: 18px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-family: 'JetBrainsMono';
+    font-size: 12px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.axis-min {
+    left: -4px;
+}
+
+.axis-max {
+    right: 26px;
+}
+
+.axis-value {
+    position: absolute;
+    top: 64px;
+    left: 86px;
+    width: 96px;
+    height: 18px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-family: 'JetBrainsMono';
+    font-size: 13px;
+    color: var(--text-color-75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
 
 #content {
@@ -40,20 +161,103 @@ textarea {
     /* background: transparent; */
     position: sticky;
     top: 44px;
-    z-index: 1000;
+    z-index: 997;
+    transition: top 0.25s ease-in-out;
     outline: none;
 }
 
 #fontFeatures {
-    margin-top: 40px;
+    margin-top: 22px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
 }
 
+#fontPreview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 44px;
+    overflow-x: scroll;
+}
+
+#fontPreview span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    overflow-y: hidden;
+}
+
+.size {
+    font-family: 'JetBrainsMono';
+    font-size: 14px;
+    width: 26px;
+    height: 172px;
+    text-align: right;
+    color: var(--text-color-50);
+    /* background: var(--text-color-25); */
+    user-select: none;
+    position: absolute;
+    margin-left: -8px;
+    /* left: -8px; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#sizeTestText {
+    font-family: system-ui;
+    color: rgb(0, 0, 0);
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    width: max-content;
+    min-height: 26px;
+    margin-left: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 对比字号特殊样式 */
+.size8px {
+    font-size: 8px;
+}
+
+.size12px {
+    font-size: 12px;
+}
+
+.size16px {
+    font-size: 16px;
+}
+
+.size24px {
+    font-size: 24px;
+}
+
+.size32px {
+    font-size: 32px;
+}
+
+.size48px {
+    font-size: 48px;
+}
+
+.size64px {
+    font-size: 64px;
+}
+
+.size72px {
+    font-size: 72px;
+}
+
+.size128px {
+    font-size: 128px;
+}
+
 .feature-title {
-    margin-top: -32px;
     font-weight: normal;
     margin-bottom: 18px;
     width: 100%;
@@ -83,8 +287,8 @@ textarea {
 
 .info-title h3 {
     font-weight: normal;
-    font-size: 20px;
-    opacity: 0.9;
+    font-size: 24px;
+    opacity: 1;
     margin: 0;
 }
 
@@ -108,12 +312,13 @@ textarea {
     align-items: center;
     flex-direction: row;
     gap: 8px;
-    height: 28px;
-    padding-left: 5px;
+    height: 30px;
+    padding-left: 8px;
     padding-right: 5px;
-    width: calc(100% - 10px);
+    width: calc(100% - 13px);
     justify-content: space-between;
     transition: all 0.25s ease-in-out;
+    font-size: 14px;
 }
 
 .feature-control input[type="checkbox"] {
@@ -121,7 +326,7 @@ textarea {
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 196px;
-    height: 28px;
+    height: 30px;
     border: solid 1px var(--text-color-25);
     position: absolute;
     margin: 0;
@@ -140,9 +345,10 @@ textarea {
     margin-left: -8px;
     font-family: "SegoeFlunetIcons";
     font-size: 16px;
-    top: 5px;
+    top: 6px;
     transition: all 0.15s ease-in-out;
     position: relative;
+    color: var(--text-color-75);
 }
 
 .feature-control input[type="checkbox"]:checked::after {
@@ -151,8 +357,8 @@ textarea {
 }
 
 .feature-control input[type="checkbox"]:checked+label {
-    padding-left: 28px;
-    width: calc(100% - 33px);
+    padding-left: 27px;
+    width: calc(100% - 32px);
 }
 
 .featureName {
@@ -172,20 +378,23 @@ textarea {
 
 #variableAxes {
     margin-top: 10px;
+    margin-bottom: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .axis-control {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
+    flex-direction: column;
 }
 
 .axis-control label {
     min-width: 100px;
-}
-
-.axis-control input[type="range"] {
-    margin: 0 10px;
 }
 
 .axis-min,
@@ -563,7 +772,7 @@ p#loadedFontName {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    position: fixed;
     z-index: 1001;
     top: calc(50% - 128px);
     color: var(--text-color);
@@ -600,6 +809,7 @@ p#loadedFontName {
     font-family: "SegoeFlunetIcons";
     font-size: 38px;
     margin-bottom: -12px;
+    color: #46a5cc;
 }
 
 #welcome footer {
@@ -625,8 +835,10 @@ p#loadedFontName {
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: #0F5D7D;
-    background: #D5F3FF;
+    /* color: #0F5D7D; */
+    /* background: #D5F3FF; */
+    color: var(--text-color);
+    border: solid 1px var(--text-color-25);
     padding: 7px 10px 7px 12px;
     gap: 6px;
     border-radius: 6px;
@@ -655,4 +867,11 @@ p#loadedFontName {
     font-family: 'JetBrainsMono', system-ui;
     font-size: 14px;
     line-height: 25px;
+}
+
+#sizeTestText {
+    font-family: system-ui;
+    color: rgb(0, 0, 0);
+    font-feature-settings: normal;
+    font-variation-settings: normal;
 }

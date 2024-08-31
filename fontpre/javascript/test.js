@@ -3,6 +3,18 @@ const loadedFontName = document.getElementById('loadedFontName');
 const fontSelect = document.getElementById('fontSelect');
 const fontSize = document.getElementById('fontSize');
 const testText = document.getElementById('testText');
+
+// 获取全部固定字号的测试文本
+const sizeTestText8 = document.querySelector('.size8px');
+const sizeTestText12 = document.querySelector('.size12px');
+const sizeTestText16 = document.querySelector('.size16px');
+const sizeTestText24 = document.querySelector('.size24px');
+const sizeTestText32 = document.querySelector('.size32px');
+const sizeTestText48 = document.querySelector('.size48px');
+const sizeTestText64 = document.querySelector('.size64px');
+const sizeTestText72 = document.querySelector('.size72px');
+const sizeTestText128 = document.querySelector('.size128px');
+
 const fontFeatures = document.getElementById('fontFeatures');
 const variableAxes = document.getElementById('variableAxes');
 const fontColor = document.getElementById('fontColor');
@@ -23,6 +35,12 @@ function changePage() {
     welcomeBox.style.opacity = '0';
     headerBox.style.opacity = '1';
     headerBox.style.marginTop = '0';
+    body.style.overflowY = 'auto'
+    setTimeout(() => {
+        if (welcomeBox) {
+            welcomeBox.remove();
+        }
+    }, 150);
 }
 
 const featureDescriptions = {
@@ -225,8 +243,11 @@ async function checkFontFeatures(fontName) {
         axes.forEach(axis => {
             const div = document.createElement('div');
             div.className = 'axis-control';
+
+            // <span class="featureName">${axis.tag}</span>
+
             div.innerHTML = `
-                <label for="${axis.tag}" title="${featureDescriptions[axis.tag] || axis.tag}">${featureDescriptions[axis.tag] || axis.name.en || axis.tag} (${axis.tag})</label>
+                <label for="${axis.tag}" title="${featureDescriptions[axis.tag] || axis.tag}">${featureDescriptions[axis.tag] || axis.name.en || axis.tag} </label>
                 <span class="axis-min">${Math.round(axis.minValue)}</span>
                 <input type="range" id="${axis.tag}" name="${axis.tag}"
                        min="${axis.minValue}" max="${axis.maxValue}" 
@@ -279,6 +300,10 @@ function change75Variable(newColor) {
     document.documentElement.style.setProperty('--text-color-75', newColor);
 }
 
+function changeSizeBGVariable(newColor) {
+    document.documentElement.style.setProperty('--size-color-bg', newColor);
+}
+
 fontSize.addEventListener('keydown', (e) => {
     const allowedKeys = ['ArrowUp', 'ArrowDown'];
     if (!allowedKeys.includes(e.key)) {
@@ -328,12 +353,58 @@ function updateTextStyle() {
     testText.style.fontFeatureSettings = fontFeatureSettings || 'normal';
     testText.style.fontVariationSettings = fontVariationSettings || 'normal';
 
+    // 修改固定字号测试文本颜色
+    sizeTestText8.style.color = color;
+    sizeTestText12.style.color = color;
+    sizeTestText16.style.color = color;
+    sizeTestText24.style.color = color;
+    sizeTestText32.style.color = color;
+    sizeTestText48.style.color = color;
+    sizeTestText64.style.color = color;
+    sizeTestText72.style.color = color;
+    sizeTestText128.style.color = color;
+
+    // 修改固定字号测试文本字体
+    sizeTestText8.style.fontFamily = selectedFont;
+    sizeTestText12.style.fontFamily = selectedFont;
+    sizeTestText16.style.fontFamily = selectedFont;
+    sizeTestText24.style.fontFamily = selectedFont;
+    sizeTestText32.style.fontFamily = selectedFont;
+    sizeTestText48.style.fontFamily = selectedFont;
+    sizeTestText64.style.fontFamily = selectedFont;
+    sizeTestText72.style.fontFamily = selectedFont;
+    sizeTestText128.style.fontFamily = selectedFont;
+
+    // 修改固定字号测试文本特性选项
+    sizeTestText8.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText12.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText16.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText24.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText32.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText48.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText64.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText72.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    sizeTestText128.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+
+    // 修改固定字号测试文本可变选项数值
+    sizeTestText8.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText12.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText16.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText24.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText32.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText48.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText64.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText72.style.fontVariationSettings = fontVariationSettings || 'normal';
+    sizeTestText128.style.fontVariationSettings = fontVariationSettings || 'normal';
+
     bgColor.addEventListener('change', function () {
         const selectedColor = this.value;
         body.style.backgroundColor = this.value
         testText.style.backgroundColor = this.value
         const rgbColor = hexToRgb(selectedColor);
         const luminance = getLuminance(rgbColor);
+
+        changeSizeBGVariable(this.value)
         // console.log('明度：', luminance);
 
         if (luminance < 0.5) {
@@ -357,4 +428,59 @@ updateTextStyle();
 function updateTestText(element) {
     var thisText = element.value;
     // console.log(thisText)
+    sizeTestText8.textContent = thisText;
+    sizeTestText12.textContent = thisText;
+    sizeTestText16.textContent = thisText;
+    sizeTestText24.textContent = thisText;
+    sizeTestText32.textContent = thisText;
+    sizeTestText48.textContent = thisText;
+    sizeTestText64.textContent = thisText;
+    sizeTestText72.textContent = thisText;
+    sizeTestText128.textContent = thisText;
 }
+
+function syncHeights() {
+    var sizeElements = document.querySelectorAll('.size');
+
+    for (var i = 0; i < sizeElements.length; i++) {
+        var sizeElement = sizeElements[i];
+        var sizeTestText = sizeElement.nextElementSibling;
+
+        if (sizeTestText && sizeTestText.id === 'sizeTestText') {
+            var height = sizeTestText.offsetHeight;
+            sizeElement.style.height = height + 'px';
+            // console.log('Synced height for a .size element: ' + height + 'px');
+        }
+        //  else {
+        //     console.error('No adjacent #sizeTestText found for a .size element');
+        // }
+    }
+}
+
+// 页面加载完成后执行同步
+document.addEventListener('DOMContentLoaded', syncHeights);
+
+function adjustMargin() {
+    const fontPreview = document.getElementById('fontPreview');
+    const fontPreviewTop = fontPreview.getBoundingClientRect().top;
+
+    if (fontPreviewTop <= 128) {
+        testText.style.top = '-150px';
+    } else {
+        testText.style.top = '44px';
+    }
+}
+
+function scrollToTop() {
+    // 方法1：使用 window.scrollTo
+    window.scrollTo(0, 0);
+}
+
+// 在页面加载完成后调用 scrollToTop 函数和 adjustMargin 函数
+window.addEventListener('load', function() {
+    scrollToTop();
+    adjustMargin();
+});
+
+// 在页面加载完成后和滚动时调用 adjustMargin 函数
+window.addEventListener('scroll', adjustMargin);

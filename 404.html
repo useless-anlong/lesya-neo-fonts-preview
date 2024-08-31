@@ -4,43 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>主页 - Twinkle 笔记</title> -->
-    <title>Twinkle 笔记</title>
-    <link rel="stylesheet" type="text/css" href="./style/main.css">
-    <link rel="stylesheet" type="text/css" href="./style/markdown.css">
-    <link rel="stylesheet" type="text/css" href="./style/editor.css">
-    <link rel="stylesheet" type="text/css" href="./style/header.css">
-    <link rel="stylesheet" type="text/css" href="./style/topbar.css">
-    <link rel="stylesheet" type="text/css" href="./fonts/msyh/result.css">
-    <link rel="stylesheet" type="text/css" href="./fonts/msyhsb/result.css">
-    <link rel="stylesheet" type="text/css" href="./fonts/msyhl/result.css">
-    <link rel="stylesheet" type="text/css" href="./fonts/msyhbd/result.css">
-    <link rel="stylesheet" type="text/css" href="./style/highlights.css">
+    <title>出错啦 - Lesya Neo 工具集</title>
 </head>
 
 <body>
-    <div class="tab-container" id="tab-container" style="opacity: 0.5; pointer-events: none;">
-        <div class="btns-container">
-            <button id="logo-box" onclick="switchToTab1()" title="主页">
-                <img src="./img/logo.png" width="16px">
-            </button>
-            <button id="menu-btn" title="主菜单">
-                <icon></icon>
-            </button>
-            <!-- <button id="new-tab-btn" title="创建新标签页">
-                <icon></icon>
-            </button> -->
-            <button id="home-button" title="搜索" class="homeTab">
-                <icon></icon>
-            </button>
-        </div>
-        <div class="tabs-container">
-            <div class="tabs-scroll" id="tabs-scroll">
-
-            </div>
-        </div>
-    </div>
     <style>
+        @font-face {
+            font-family: "SegoeFlunetIcons";
+            src: url("../fonts/SegoeIcons.ttf");
+        }
+
+        @font-face {
+            font-family: "JetBrainsMono";
+            src: url("../fonts/JetBrainsMono.ttf");
+        }
+
+        :root {
+            --text-color: #000000;
+            --text-color-75: rgba(0, 0, 0, 0.5);
+            --text-color-50: rgba(0, 0, 0, 0.35);
+            --text-color-25: rgba(0, 0, 0, 0.1);
+        }
+
         .errorMain {
             display: flex;
             flex-direction: column;
@@ -61,7 +46,7 @@
         }
 
         .errorMain code {
-            font-family: Jetbrains Mono;
+            font-family: JetBrainsMono;
             font-size: 12px;
             font-weight: 150;
             position: fixed;
@@ -70,32 +55,21 @@
         }
 
         .errorMain button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            padding: 6px 10px 8px 12px;
-            margin-top: 10px;
-            margin-bottom: 18px;
-            margin-left: -3px;
-            background: #ffffff21;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: solid 1px rgba(255, 255, 255, 0);
-            border-radius: 5px;
-            color: white;
-            transition: all .15s ease-in-out;
-            text-decoration: none;
+            padding: 5px 12px 6px 10px;
+            background: transparent;
+            border-radius: 6px;
+            border: solid 1px var(--text-color-25);
+            border-bottom: solid 2px var(--text-color-25);
+            font-size: 14px;
+            transition: all 0.15s ease-in-out;
+            user-select: none;
+            margin-top: 20px;
         }
 
         .errorMain button:hover {
-            border-bottom: solid 1px rgba(255, 255, 255, 0.25);
-            color: white;
-        }
-
-        .errorMain button icon {
-            transform: translateY(1.199px);
+            background: var(--text-color-25);
+            border: solid 1px var(--text-color-50);
+            border-bottom: solid 2px var(--text-color-50);
         }
 
         .errorMain a {
@@ -105,14 +79,14 @@
     <div id="tab-contents">
         <div class="errorMain">
             <h1>Oops!</h1>
-            <h2>实在抱歉，Twinkle 笔记遇到致命错误。</h2>
-            <p>刚刚我们从编辑器页面被迫重定向到了一个不存在的页面。</p>
+            <h2>糟糕！没找到你想要访问的页面！</h2>
+            <p>你想找的那个页面可能不在这里，或者名字不对，请再试一下吧。</p>
             <a href="./index.html">
                 <button>
-                    <icon></icon>重载编辑器
+                    回到首页
                 </button>
             </a>
-            <code>electron: Failed to load URL with error: ERR_FILE_NOT_FOUND</code>
+            <code>404 Not Found</code>
         </div>
     </div>
 
