@@ -1,5 +1,4 @@
 const fontFile = document.getElementById('fontFile');
-const loadedFontName = document.getElementById('loadedFontName');
 const fontSelect = document.getElementById('fontSelect');
 const fontSize = document.getElementById('fontSize');
 const testText = document.getElementById('testText');
@@ -92,7 +91,8 @@ const featureDescriptions = {
     'ital': '斜体',
     'slnt': '倾斜',
     'opsz': '光学尺寸',
-    'vert': '竖排书写'
+    'vert': '竖排书写',
+    'Serif': '衬线',
 };
 
 fontFile.addEventListener('change', (e) => {
@@ -129,7 +129,6 @@ async function loadLocalFont(file) {
         document.fonts.add(fontFace);
 
         customFont = fontName;
-        loadedFontName.textContent = `${fontName}`;
 
         const option = document.createElement('option');
         option.value = fontName;
@@ -453,3 +452,8 @@ window.addEventListener('load', function () {
 
 // 在页面加载完成后和滚动时调用 adjustMargin 函数
 window.addEventListener('scroll', adjustMargin);
+
+function back() {
+    var origin = window.location.origin;
+    window.location.replace(origin);
+}

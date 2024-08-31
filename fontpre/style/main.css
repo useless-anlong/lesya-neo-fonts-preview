@@ -42,7 +42,7 @@ body {
     height: 18px;
     border-radius: 4px;
     background: transparent;
-    outline: 2px;
+    outline: 0;
     border: 1px solid var(--text-color-25);
     margin: 0;
     padding: 4px;
@@ -56,8 +56,8 @@ body {
 .axis-control input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--text-color-75);
     cursor: pointer;
@@ -65,8 +65,8 @@ body {
 }
 
 .axis-control input[type="range"]::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--text-color-75);
     cursor: pointer;
@@ -76,8 +76,8 @@ body {
 .axis-control input[type="range"]#opsz::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--text-color-50);
     cursor: pointer;
@@ -85,8 +85,8 @@ body {
 }
 
 .axis-control input[type="range"]#opsz::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--text-color-50);
     cursor: pointer;
@@ -143,7 +143,7 @@ body {
 
 #content {
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     opacity: 0;
     transition: all 0.15s ease-in-out 0.35s;
 }
@@ -156,6 +156,7 @@ textarea {
     margin: 0;
     margin-left: -8px;
     padding: 26px 8px 7px 8px;
+    border-bottom: solid 1px var(--text-color-25);
     /* border-radius: 6px; */
     font-family: system-ui;
     /* background: transparent; */
@@ -425,7 +426,7 @@ header {
     -webkit-app-region: drag;
     display: flex;
     flex-direction: row;
-    padding-left: 52px;
+    padding-left: 100px;
     padding-right: 16px;
     align-items: center;
     backdrop-filter: blur(50px);
@@ -438,7 +439,12 @@ header {
 }
 
 header svg path {
-    fill: var(--text-color-50)
+    fill: var(--text-color-75);
+    transition: all 0.15s ease-in-out 0.35s;
+}
+
+#logobottom {
+    fill: var(--text-color)
 }
 
 input#fontFile {
@@ -481,6 +487,13 @@ p#loadedFontName {
     font-family: system-ui !important;
     font-size: 14px;
     user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#loadedFontName #bg {
+    fill: var(--text-color-25);
 }
 
 #fontSelect {
@@ -805,7 +818,10 @@ p#loadedFontName {
 #welcome p {
     user-select: none;
     margin: 0;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    padding-left: 22px;
+    padding-right: 22px;
+    text-align: center;
 }
 
 #welcome .icon {
@@ -835,6 +851,11 @@ p#loadedFontName {
     position: fixed;
     bottom: 24px;
     opacity: 0.5;
+    transition: all 0.15s ease-in-out;
+}
+
+#welcome footer:hover {
+    opacity: 1;
 }
 
 #welcome footer p {
@@ -894,7 +915,7 @@ p#loadedFontName {
 .goback {
     display: flex;
     align-items: center;
-    width: 70px;
+    width: 96px;
     height: 44px;
     justify-content: center;
     position: fixed;

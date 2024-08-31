@@ -1,0 +1,81 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: scroll;
+    margin: 0;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 20px;
+    background: rgba(56, 112, 227, 0.5);
+    border-radius: 20px;
+    padding: 4px;
+    box-shadow: rgba(56, 112, 227, 0) 0px 2px 0px;
+    backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+}
+
+footer:hover {
+    background: rgba(56, 112, 227, 1);
+    bottom: 22px;
+    box-shadow: rgba(56, 112, 227, 0.4) 0px 2px 10px;
+}
+
+.toolShortcut {
+    height: 196px;
+    width: 196px;
+    opacity: 1;
+    border-radius: 15px;
+    border: 0.5px solid rgba(219, 219, 219, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 14px;
+    transform: translateY(0px);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+.toolShortcut:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.shortcutTitle {
+    width: 168px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.2;
+    margin: 0;
+    position: absolute;
+    margin-top: 148px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 32px;
+    max-width: 1200px;
+    min-height: calc(100% - 128px);
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-bottom: 56px;
+}
