@@ -158,7 +158,10 @@ textarea {
     padding: 26px 8px 7px 8px;
     border-bottom: solid 1px var(--text-color-25);
     /* border-radius: 6px; */
-    font-family: system-ui;
+    font-family: var(--selected-font, inherit);
+    color: var(--selected-color, inherit);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-variation-settings: var(--font-variation-settings, normal);
     /* background: transparent; */
     position: sticky;
     top: 44px;
@@ -211,10 +214,10 @@ textarea {
 }
 
 #sizeTestText {
-    font-family: system-ui;
-    color: rgb(0, 0, 0);
-    font-feature-settings: normal;
-    font-variation-settings: normal;
+    font-family: var(--selected-font, inherit);
+    color: var(--selected-color, inherit);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-variation-settings: var(--font-variation-settings, normal);
     width: max-content;
     min-height: 26px;
     margin-left: 28px;
@@ -482,7 +485,7 @@ input#fontFile {
     background: var(--text-color-25);
 }
 
-p#loadedFontName {
+p#title {
     margin: 0;
     font-family: system-ui !important;
     font-size: 14px;
@@ -492,7 +495,7 @@ p#loadedFontName {
     gap: 8px;
 }
 
-#loadedFontName #bg {
+#title #bg {
     fill: var(--text-color-25);
 }
 
@@ -877,7 +880,7 @@ p#loadedFontName {
     border: solid 1px var(--text-color-25);
     padding: 7px 10px 7px 12px;
     gap: 6px;
-    border-radius: 6px;
+    border-radius: 10px;
     width: 100%;
     margin-left: -8px;
     user-select: none;
@@ -905,13 +908,6 @@ p#loadedFontName {
     line-height: 25px;
 }
 
-#sizeTestText {
-    font-family: system-ui;
-    color: rgb(0, 0, 0);
-    font-feature-settings: normal;
-    font-variation-settings: normal;
-}
-
 .goback {
     display: flex;
     align-items: center;
@@ -934,4 +930,126 @@ p#loadedFontName {
 
 .goback:hover {
     background: var(--text-color-25);
+}
+
+.char-map-item {
+    display: flex;
+    height: 72px;
+    width: 72px;
+    font-size: 32px;
+    border: solid 1px var(--text-color-25);
+    font-family: var(--selected-font, inherit);
+    color: var(--selected-color, inherit);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-variation-settings: var(--font-variation-settings, normal);
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.char-map-item span {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: system-ui;
+    color: var(--text-color-50);
+    margin-top: -50px;
+    margin-left: -52px;
+    user-select: none;
+}
+
+.char-map-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+#charactermap {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 64px;
+    width: 100%;
+}
+
+#charactermap h3 {
+    font-weight: normal;
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+@media screen and (max-width: 420px) {
+    .errorinfo {
+        align-items: flex-start !important;
+        background: white !important;
+        color: var(--text-color) !important;
+        border: solid 1px var(--text-color-25) !important;
+        padding: 8px 12px 12px 12px !important;
+        gap: 6px !important;
+        border-radius: 10px !important;
+        width: calc(100% - 2px) !important;
+        margin-left: -8px !important;
+        margin-bottom: 8px !important;
+        z-index: 10 !important;
+        position: static !important;
+        box-shadow: none !important;
+    }
+}
+
+.errorinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: white;
+    /* backdrop-filter: blur(20px); */
+    color: var(--text-color);
+    border: solid 1px var(--text-color-25);
+    box-shadow: 0px 4px 20px var(--text-color-25);
+    padding: 14px 18px 18px 18px;
+    gap: 6px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    position: fixed;
+    margin-left: -16px;
+    bottom: 18px;
+    user-select: none;
+    z-index: 30;
+}
+
+.errorinfo .icon {
+    font-family: SegoeFlunetIcons;
+    font-size: 18px;
+}
+
+.errorinfo p {
+    font-family: system-ui;
+    font-size: 14px;
+    margin: 0;
+}
+
+.infomain h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+main.infomain {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 0px;
+}
+
+.infomain code {
+    font-family: 'JetBrainsMono';
+    font-size: 12px;
+    color: var(--text-color-75);
+    margin-top: 12px;
 }

@@ -2,6 +2,7 @@ const fontFile = document.getElementById('fontFile');
 const fontSelect = document.getElementById('fontSelect');
 const fontSize = document.getElementById('fontSize');
 const testText = document.getElementById('testText');
+const charMapItems = document.querySelectorAll('.char-map-item');
 
 // 获取全部固定字号的测试文本
 const sizeTestText8 = document.querySelector('.size8px');
@@ -140,7 +141,8 @@ async function loadLocalFont(file) {
         updateTextStyle();
     } catch (error) {
         console.error('Error loading font:', error);
-        loadedFontName.textContent = `加载字体失败: ${error.message}`;
+        loadedFontName.innerHTML = `<div class="errorinfo"><main class="infomain"><span class="icon"></span><h4>加载字体时出错</h4><p>请刷新页面并选择其他字体文件再试。</p><code>${error.message}</code></main></div>`;
+        body.style.overflowY = "hidden"
     }
     //  finally {
     //     URL.revokeObjectURL(fontUrl);
@@ -354,19 +356,32 @@ function updateTextStyle() {
         }
     }
 
-    const applyStyle = (element) => {
-        element.style.fontFamily = selectedFont;
-        element.style.color = color;
-        element.style.fontFeatureSettings = fontFeatureSettings || 'normal';
-        element.style.fontVariationSettings = fontVariationSettings || 'normal';
-    };
+    // const applyStyle = (element) => {
+
+    //     element.style.fontFamily = selectedFont;
+    //     element.style.color = color;
+    //     element.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    //     element.style.fontVariationSettings = fontVariationSettings || 'normal';
+    // };
 
     testText.style.fontSize = `${size}px`;
-    applyStyle(testText);
+    // applyStyle(testText);
 
-    // 修改固定字号测试文本样式
-    [sizeTestText8, sizeTestText12, sizeTestText16, sizeTestText24, sizeTestText32,
-        sizeTestText48, sizeTestText64, sizeTestText72, sizeTestText128].forEach(applyStyle);
+    // charMapItems.forEach(item => {
+    //     item.style.fontFamily = selectedFont;
+    //     item.style.color = color;
+    //     item.style.fontFeatureSettings = fontFeatureSettings || 'normal';
+    //     item.style.fontVariationSettings = fontVariationSettings || 'normal';
+    // });
+
+    document.documentElement.style.setProperty('--selected-font', selectedFont);
+    document.documentElement.style.setProperty('--selected-color', color);
+    document.documentElement.style.setProperty('--font-feature-settings', fontFeatureSettings);
+    document.documentElement.style.setProperty('--font-variation-settings', fontVariationSettings);
+
+    // // 修改固定字号测试文本样式
+    // [sizeTestText8, sizeTestText12, sizeTestText16, sizeTestText24, sizeTestText32,
+    //     sizeTestText48, sizeTestText64, sizeTestText72, sizeTestText128].forEach(applyStyle);
 
     bgColor.addEventListener('change', function () {
         const selectedColor = this.value;

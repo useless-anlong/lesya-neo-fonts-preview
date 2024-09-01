@@ -25,7 +25,7 @@
                     fill-rule="evenodd" fill-opacity="1" />
             </svg>
         </label>
-        <p id="loadedFontName">
+        <p id="title">
             <!-- <img height="20" width="20" src="./style/icon.png" alt="小工具 Logo 图标"> -->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
                 width="20" height="20" viewBox="0 0 20 20">
@@ -58,12 +58,104 @@
             <input type="color" id="bgColor" value="#FFFFFF">
         </div>
 
-
+        <div id="loadedFontName"></div>
         <div id="font-info"></div>
         <div id="variableAxes"></div>
         <div id="fontFeatures">
             <div class="feature-title">
                 <h3>请选择本地字体文件来预览字体。</h3>
+            </div>
+        </div>
+        <div id="charactermap">
+            <h3>字符映射图</h3>
+            <div class="char-map-main">
+                <!-- 大写字母 -->
+                <div class="char-map-item"><span>A</span>A</div>
+                <div class="char-map-item"><span>B</span>B</div>
+                <div class="char-map-item"><span>C</span>C</div>
+                <div class="char-map-item"><span>D</span>D</div>
+                <div class="char-map-item"><span>E</span>E</div>
+                <div class="char-map-item"><span>F</span>F</div>
+                <div class="char-map-item"><span>G</span>G</div>
+                <div class="char-map-item"><span>H</span>H</div>
+                <div class="char-map-item"><span>I</span>I</div>
+                <div class="char-map-item"><span>J</span>J</div>
+                <div class="char-map-item"><span>K</span>K</div>
+                <div class="char-map-item"><span>L</span>L</div>
+                <div class="char-map-item"><span>M</span>M</div>
+                <div class="char-map-item"><span>N</span>N</div>
+                <div class="char-map-item"><span>O</span>O</div>
+                <div class="char-map-item"><span>P</span>P</div>
+                <div class="char-map-item"><span>Q</span>Q</div>
+                <div class="char-map-item"><span>R</span>R</div>
+                <div class="char-map-item"><span>S</span>S</div>
+                <div class="char-map-item"><span>T</span>T</div>
+                <div class="char-map-item"><span>U</span>U</div>
+                <div class="char-map-item"><span>V</span>V</div>
+                <div class="char-map-item"><span>W</span>W</div>
+                <div class="char-map-item"><span>X</span>X</div>
+                <div class="char-map-item"><span>Y</span>Y</div>
+                <div class="char-map-item"><span>Z</span>Z</div>
+            </div>
+            <div class="char-map-main">
+                <!-- 小写字母 -->
+                <div class="char-map-item"><span>a</span>a</div>
+                <div class="char-map-item"><span>b</span>b</div>
+                <div class="char-map-item"><span>c</span>c</div>
+                <div class="char-map-item"><span>d</span>d</div>
+                <div class="char-map-item"><span>e</span>e</div>
+                <div class="char-map-item"><span>f</span>f</div>
+                <div class="char-map-item"><span>g</span>g</div>
+                <div class="char-map-item"><span>h</span>h</div>
+                <div class="char-map-item"><span>i</span>i</div>
+                <div class="char-map-item"><span>j</span>j</div>
+                <div class="char-map-item"><span>k</span>k</div>
+                <div class="char-map-item"><span>l</span>l</div>
+                <div class="char-map-item"><span>m</span>m</div>
+                <div class="char-map-item"><span>n</span>n</div>
+                <div class="char-map-item"><span>o</span>o</div>
+                <div class="char-map-item"><span>p</span>p</div>
+                <div class="char-map-item"><span>q</span>q</div>
+                <div class="char-map-item"><span>r</span>r</div>
+                <div class="char-map-item"><span>s</span>s</div>
+                <div class="char-map-item"><span>t</span>t</div>
+                <div class="char-map-item"><span>u</span>u</div>
+                <div class="char-map-item"><span>v</span>v</div>
+                <div class="char-map-item"><span>w</span>w</div>
+                <div class="char-map-item"><span>x</span>x</div>
+                <div class="char-map-item"><span>y</span>y</div>
+                <div class="char-map-item"><span>z</span>z</div>
+            </div>
+            <div class="char-map-main">
+                <!-- 数字 -->
+                <div class="char-map-item"><span>0</span>0</div>
+                <div class="char-map-item"><span>1</span>1</div>
+                <div class="char-map-item"><span>2</span>2</div>
+                <div class="char-map-item"><span>3</span>3</div>
+                <div class="char-map-item"><span>4</span>4</div>
+                <div class="char-map-item"><span>5</span>5</div>
+                <div class="char-map-item"><span>6</span>6</div>
+                <div class="char-map-item"><span>7</span>7</div>
+                <div class="char-map-item"><span>8</span>8</div>
+                <div class="char-map-item"><span>9</span>9</div>
+            </div>
+            <div class="char-map-main">
+                <!-- 特殊符号 -->
+                <div class="char-map-item"><span>#</span>#</div>
+                <div class="char-map-item"><span>$</span>$</div>
+                <div class="char-map-item"><span>%</span>%</div>
+                <div class="char-map-item"><span>&</span>&</div>
+                <div class="char-map-item"><span>*</span>*</div>
+                <div class="char-map-item"><span>(</span>(</div>
+                <div class="char-map-item"><span>)</span>)</div>
+                <div class="char-map-item"><span>_</span>_</div>
+                <div class="char-map-item"><span>-</span>-</div>
+                <div class="char-map-item"><span>+</span>+</div>
+                <div class="char-map-item"><span>=</span>=</div>
+                <div class="char-map-item"><span>?</span>?</div>
+                <div class="char-map-item"><span>:</span>:</div>
+                <div class="char-map-item"><span>"</span>"</div>
+                <div class="char-map-item"><span>;</span>;</div>
             </div>
         </div>
         <div id="fontPreview">
