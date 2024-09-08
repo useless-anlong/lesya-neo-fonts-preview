@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <label for="fontFile" class="fileUploadLabel" title="加载字体" style="left: 45px;"></label>
+        <label for="fontFile" class="fileUploadLabel" title="加载字体" style="left: 45px;"></label>
         <!-- <label for="fontFile" class="fileUploadLabel" title="加载字体" style="right: 50px; left: auto;"></label> -->
         <label class="fileUploadLabel" title="返回首页" onclick="back()">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
@@ -25,6 +25,8 @@
                     fill-rule="evenodd" fill-opacity="1" />
             </svg>
         </label>
+        <label class="fileUploadLabel" title="展开属性控制器"  onclick="toggleDetails()" style="left: 90px;"></label>
+        <!-- <label class="fileUploadLabel" title="拷贝字体文件" onclick="downloadLoadedFont()"></label> -->
         <p id="title">
             <!-- <img height="20" width="20" src="./style/icon.png" alt="小工具 Logo 图标"> -->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
@@ -42,13 +44,8 @@
             字体查看 & 预览
         </p>
     </header>
-    <div id="content">
-        <input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2">
-        <!-- <p id="loadedFontName">未加载字体</p> -->
-        <select id="fontSelect"></select>
-
-        <textarea id="testText" oninput="updateTestText(this)">中国智造，慧及全球 Innovation in China.</textarea>
-
+    <details>
+        <summary id="setvarsummary"></summary>
         <div id="color-picker">
             <label for="fontSize" id="forFontSize"></label>
             <input type="number" id="fontSize" value="48" min="8" max="512">
@@ -57,15 +54,42 @@
             <label for="bgColor" id="forBgColor"></label>
             <input type="color" id="bgColor" value="#FFFFFF">
         </div>
-
-        <div id="loadedFontName"></div>
-        <div id="font-info"></div>
         <div id="variableAxes"></div>
         <div id="fontFeatures">
             <div class="feature-title">
                 <h3>请选择本地字体文件来预览字体。</h3>
             </div>
         </div>
+    </details>
+    <div id="content">
+        <input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2">
+        <!-- <p id="loadedFontName">未加载字体</p> -->
+        <select id="fontSelect"></select>
+
+        <textarea id="testText" oninput="updateTestText(this)">中国智造，慧及全球 Innovation in China.</textarea>
+
+        <!-- <div id="color-picker">
+            <label for="fontSize" id="forFontSize"></label>
+            <input type="number" id="fontSize" value="48" min="8" max="512">
+            <label for="fontColor" id="forFontColor"></label>
+            <input type="color" id="fontColor" value="#000000">
+            <label for="bgColor" id="forBgColor"></label>
+            <input type="color" id="bgColor" value="#FFFFFF">
+        </div> -->
+
+        <div id="loadedFontName"></div>
+
+        <div id="font-info"></div>
+
+        <!-- <details>
+            <summary></summary>
+            <div id="variableAxes"></div>
+            <div id="fontFeatures">
+                <div class="feature-title">
+                    <h3>请选择本地字体文件来预览字体。</h3>
+                </div>
+            </div>
+        </details> -->
         <div id="charactermap">
             <h3>字符映射图</h3>
             <div class="char-map-main">
