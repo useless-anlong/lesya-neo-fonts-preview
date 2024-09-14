@@ -40,14 +40,14 @@ body {
 .axis-control input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    width: calc(100% - 40px);
+    width: calc(100% - 42px);
     height: 18px;
     border-radius: 4px;
     background: transparent;
     outline: 0;
     border: 1px solid var(--text-color-25);
     margin: 0;
-    padding: 4px;
+    padding: 4px 6px;
     transition: all 0.15s ease-in-out;
 }
 
@@ -101,36 +101,30 @@ body {
 
 .axis-min,
 .axis-max {
-    position: absolute;
-    top: 64px;
-    width: 36px;
-    height: 18px;
     border: none;
     background: transparent;
     border-radius: 6px;
     font-family: 'JetBrainsMono';
     font-size: 12px;
-    color: #666;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
 }
 
-.axis-min {
-    left: -4px;
-}
 
-.axis-max {
-    right: 26px;
+.axis {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 30px);
+    padding-top: 6px;
+    font-size: 14px;
+    color: var(--text-color-50);
 }
 
 .axis-value {
-    position: absolute;
-    top: 64px;
-    left: 86px;
-    width: 96px;
-    height: 18px;
     border: none;
     background: transparent;
     border-radius: 6px;
@@ -144,10 +138,15 @@ body {
 }
 
 #content {
-    width: 100%;
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
     max-width: 1000px;
     opacity: 0;
     transition: opacity 0.15s ease-in-out 0.35s, width 0.15s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
 }
 
 #testText {
@@ -157,6 +156,7 @@ body {
     resize: unset;
     margin: 0;
     margin-left: -8px;
+    margin-top: -150px;
     padding: 26px 8px 7px 8px;
     border-bottom: solid 1px var(--text-color-25);
     /* border-radius: 6px; */
@@ -172,22 +172,22 @@ body {
     outline: none;
 }
 
+#font-info {
+    margin-top: -48px;
+}
+
 #fontFeatures {
-    margin-top: 22px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
-    padding-top: 64px;
 }
 
 #fontPreview {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 44px;
     overflow-x: scroll;
-    padding-top: 64px;
 }
 
 #fontPreview span {
@@ -268,7 +268,6 @@ body {
 .feature-title {
     font-weight: normal;
     margin-bottom: 18px;
-    margin-top: -64px;
     width: 100%;
     user-select: none;
 }
@@ -407,11 +406,11 @@ body {
     min-width: 100px;
 }
 
-.axis-min,
+/* .axis-min,
 .axis-max {
     font-size: 0.8em;
     color: var(--text-color-50);
-}
+} */
 
 #color-picker {
     margin-top: 10px;
@@ -974,12 +973,10 @@ p#title {
 }
 
 #charactermap {
-    margin-top: 22px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    padding-top: 64px;
     width: 100%;
 }
 
@@ -1121,7 +1118,8 @@ main.infomain {
 details {
     display: flex;
     position: fixed;
-    background: #FFFFFF25 var(--size-color-bg);
+    background: #FFFFFF25;
+    background: var(--size-color-bg);
     left: -300px;
     top: 44px;
     z-index: 1024;
@@ -1180,14 +1178,22 @@ details[open]+header label[onclick="toggleDetails()"]::before {
     opacity: 1;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
     details {
         left: -100%;
-        width: calc(100% - 100px);
+        width: calc(100% - 60px);
+        border-radius: 0 10px 0 0;
+        z-index: 2048;
     }
 
     details[open]+#content {
-        width: calc(100% - 0px);
+        width: calc(100% - 20px);
         margin-left: 0px;
+    }
+
+    #content {
+        width: calc(100% - 20px);
+        padding-left: 20px;
+        padding-right: 0px;
     }
 }

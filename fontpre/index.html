@@ -28,7 +28,7 @@
                     fill-rule="evenodd" fill-opacity="1" />
             </svg>
         </label>
-        <label class="fileUploadLabel" title="展开属性控制器"  onclick="toggleDetails()" style="left: 90px;"></label>
+        <label class="fileUploadLabel" title="展开属性控制器" onclick="toggleDetails()" style="left: 90px;"></label>
         <!-- <label class="fileUploadLabel" title="拷贝字体文件" onclick="downloadLoadedFont()"></label> -->
         <p id="title">
             <!-- <img height="20" width="20" src="./style/icon.png" alt="小工具 Logo 图标"> -->
@@ -66,33 +66,13 @@
     </details>
     <div id="content">
         <input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2">
-        <!-- <p id="loadedFontName">未加载字体</p> -->
         <select id="fontSelect"></select>
-
-        <textarea id="testText" oninput="updateTestText(this)">中国智造，慧及全球 Innovation in China.</textarea>
-
-        <!-- <div id="color-picker">
-            <label for="fontSize" id="forFontSize"></label>
-            <input type="number" id="fontSize" value="48" min="8" max="512">
-            <label for="fontColor" id="forFontColor"></label>
-            <input type="color" id="fontColor" value="#000000">
-            <label for="bgColor" id="forBgColor"></label>
-            <input type="color" id="bgColor" value="#FFFFFF">
-        </div> -->
-
         <div id="loadedFontName"></div>
 
+        <textarea id="testText" oninput="updateTestText(this)">中国智造，慧及全球 Innovation in China.</textarea>
+        
         <div id="font-info"></div>
-
-        <!-- <details>
-            <summary></summary>
-            <div id="variableAxes"></div>
-            <div id="fontFeatures">
-                <div class="feature-title">
-                    <h3>请选择本地字体文件来预览字体。</h3>
-                </div>
-            </div>
-        </details> -->
+        
         <div id="charactermap">
             <h3>字符映射图</h3>
             <div class="char-map-main">
@@ -185,46 +165,48 @@
                 <div class="char-map-item"><span>;</span>;</div>
             </div>
         </div>
-        <div id="fontPreview">
+        <div>
             <div class="feature-title">
                 <h3>固定字号对比预览</h3>
             </div>
-            <span>
-                <div class="size">8</div>
-                <div class="size8px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">12</div>
-                <div class="size12px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">16</div>
-                <div class="size16px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">24</div>
-                <div class="size24px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">32</div>
-                <div class="size32px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">48</div>
-                <div class="size48px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">64</div>
-                <div class="size64px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">72</div>
-                <div class="size72px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
-            <span>
-                <div class="size">128</div>
-                <div class="size128px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
-            </span>
+            <div id="fontPreview">
+                <span>
+                    <div class="size">8</div>
+                    <div class="size8px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">12</div>
+                    <div class="size12px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">16</div>
+                    <div class="size16px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">24</div>
+                    <div class="size24px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">32</div>
+                    <div class="size32px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">48</div>
+                    <div class="size48px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">64</div>
+                    <div class="size64px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">72</div>
+                    <div class="size72px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+                <span>
+                    <div class="size">128</div>
+                    <div class="size128px" id="sizeTestText">中国智造，慧及全球 Innovation in China.</div>
+                </span>
+            </div>
         </div>
     </div>
     <main id="welcome">

@@ -26,6 +26,8 @@ const fontInfoDiv = document.getElementById('font-info');
 
 const body = document.querySelector('body');
 
+const detailsElement = document.getElementsByTagName('details')[0];
+
 let customFont = null;
 let customFontBuffer = null;
 
@@ -88,7 +90,13 @@ function changePage() {
     welcomeBox.style.opacity = '0';
     headerBox.style.opacity = '1';
     headerBox.style.marginTop = '0';
+
+    if (window.innerWidth > 420) {
+        detailsElement.setAttribute('open', '');
+    }
+
     body.style.overflowY = 'auto'
+    
     setTimeout(() => {
         if (welcomeBox) {
             welcomeBox.remove();
@@ -221,7 +229,6 @@ async function loadLocalFont(file) {
 }
 
 function toggleDetails() {
-    const detailsElement = document.getElementsByTagName('details')[0];
     if (detailsElement.hasAttribute('open')) {
         detailsElement.removeAttribute('open');
     } else {
@@ -294,76 +301,6 @@ async function loadFontInfo(file) {
     }
 }
 
-// loadFontInput.addEventListener('change', (e) => {
-//     if (e.target.files.length > 0) {
-//         loadFontInfo(e.target.files[0]);
-//     }
-// });
-
-// async function checkFontFeatures(fontName) {
-//     fontFeatures.innerHTML = '';
-//     variableAxes.innerHTML = '';
-
-//     const font = await opentype.load(URL.createObjectURL(new Blob([customFontBuffer])));
-
-//     const features = font.tables.gsub.features;
-//     if (features) {
-//         const featureSet = new Set();
-//         features.forEach(feature => {
-//             featureSet.add(feature.tag);
-//         });
-
-//         const featuretitle = document.createElement('div')
-//         featuretitle.className = 'feature-title';
-//         featuretitle.innerHTML = '<h3>可用的 OpenType 特性</h3><span>悬停复选框以查看特性名称，部分特性未知对应中文描述。</span>';
-//         fontFeatures.appendChild(featuretitle);
-
-//         featureSet.forEach(feature => {
-//             const div = document.createElement('div');
-//             div.className = 'feature-control';
-//             div.innerHTML = `
-//                 <input type="checkbox" id="${feature}" name="${feature}" title="${featureDescriptions[feature] || feature}">
-//                 <label for="${feature}">${featureDescriptions[feature] || feature}<span class="featureName">${feature}</span></label>
-//             `;
-//             fontFeatures.appendChild(div);
-
-//             div.querySelector('input').addEventListener('change', updateTextStyle);
-//         });
-//     }
-
-//     if (font.tables.fvar) {
-//         const axes = font.tables.fvar.axes;
-//         axes.forEach(axis => {
-//             const div = document.createElement('div');
-//             div.className = 'axis-control';
-
-//             div.innerHTML = `
-//                 <label for="${axis.tag}" title="${featureDescriptions[axis.tag] || axis.tag}">${featureDescriptions[axis.tag] || axis.name.en || axis.tag} </label>
-//                 <span class="axis-min">${Math.round(axis.minValue)}</span>
-//                 <input type="range" id="${axis.tag}" name="${axis.tag}"
-//                        min="${axis.minValue}" max="${axis.maxValue}" 
-//                        value="${axis.defaultValue}" step="1"
-//                        title="${featureDescriptions[axis.tag] || axis.tag}">
-//                 <span class="axis-max">${Math.round(axis.maxValue)}</span>
-//                 <span class="axis-value">${Math.round(axis.defaultValue)}</span>
-//             `;
-//             variableAxes.appendChild(div);
-
-//             const input = div.querySelector('input');
-//             const span = div.querySelector('.axis-value');
-//             input.addEventListener('input', (e) => {
-//                 span.textContent = Math.round(e.target.value);
-//                 updateTextStyle();
-//             });
-//         });
-//     }
-
-//     // 保存字体轴信息到全局变量，以便在其他地方使用
-//     window.fontAxes = font.tables.fvar ? font.tables.fvar.axes : null;
-
-//     updateTextStyle(); // 初始化时调用一次
-// }
-
 async function checkFontFeatures(fontName) {
     fontFeatures.innerHTML = '';
     variableAxes.innerHTML = '';
@@ -403,13 +340,17 @@ async function checkFontFeatures(fontName) {
 
                 div.innerHTML = `
                     <label for="${axis.tag}" title="${featureDescriptions[axis.tag] || axis.tag}">${featureDescriptions[axis.tag] || axis.name?.en || axis.tag} </label>
-                    <span class="axis-min">${Math.round(axis.minValue)}</span>
+                    
                     <input type="range" id="${axis.tag}" name="${axis.tag}"
                            min="${axis.minValue}" max="${axis.maxValue}" 
                            value="${axis.defaultValue}" step="1"
                            title="${featureDescriptions[axis.tag] || axis.tag}">
-                    <span class="axis-max">${Math.round(axis.maxValue)}</span>
-                    <span class="axis-value">${Math.round(axis.defaultValue)}</span>
+
+                    <div class="axis">
+                        <span class="axis-min">${Math.round(axis.minValue)}</span>
+                        <span class="axis-value">${Math.round(axis.defaultValue)}</span>
+                        <span class="axis-max">${Math.round(axis.maxValue)}</span>
+                    </div>
                 `;
                 variableAxes.appendChild(div);
 
