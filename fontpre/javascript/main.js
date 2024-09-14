@@ -96,7 +96,7 @@ function changePage() {
     }
 
     body.style.overflowY = 'auto'
-    
+
     setTimeout(() => {
         if (welcomeBox) {
             welcomeBox.remove();
@@ -154,7 +154,9 @@ const featureDescriptions = {
     'slnt': '倾斜',
     'opsz': '光学尺寸',
     'vert': '竖排书写',
+    'SRIF': '衬线',
     'srif': '衬线',
+    'ccmp': '字形合成 / 分解'
 };
 
 fontFile.addEventListener('change', (e) => {
@@ -523,18 +525,13 @@ function updateTestText(element) {
     sizeTestText128.textContent = thisText;
 }
 
-// function downloadLoadedFont() {
-//     if (customFontBuffer && loadedFontFileName) {
-//         const blob = new Blob([customFontBuffer], { type: 'font/opentype' });
-//         const url = URL.createObjectURL(blob);
-//         const a = document.createElement('a');
-//         a.href = url;
-//         a.download = loadedFontFileName;
-//         document.body.appendChild(a);
-//         a.click();
-//         document.body.removeChild(a);
-//         URL.revokeObjectURL(url);
-//     } else {
-//         alert('没有可下载的字体文件。请先加载一个字体文件。');
-//     }
-// }
+document.addEventListener('DOMContentLoaded', function () {
+    var fontPreview = document.getElementById('fontPreview');    // 使用节流函数
+
+    if (fontPreview) {
+        fontPreview.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            fontPreview.scrollLeft += e.deltaY > 0 ? 300 : -300;
+        });
+    }
+});

@@ -143,10 +143,11 @@ body {
     padding-right: 20px;
     max-width: 1000px;
     opacity: 0;
-    transition: opacity 0.15s ease-in-out 0.35s, width 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out 0.35s, width 0.15s ease-in-out, margin-left 0.15s ease-in-out;
     display: flex;
     flex-direction: column;
     gap: 64px;
+    margin-left: 0px;
 }
 
 #testText {
@@ -425,7 +426,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    background: var(--text-color-25);
+    border-bottom: solid 1px var(--text-color-25);
     -webkit-app-region: drag;
     display: flex;
     flex-direction: row;
@@ -433,7 +434,7 @@ header {
     padding-right: 16px;
     align-items: center;
     backdrop-filter: blur(50px);
-    z-index: 998;
+    z-index: 2096;
     opacity: 0;
     margin-top: -44px;
     transition: all 0.2s ease-in-out 0.35s;
@@ -466,8 +467,8 @@ input#fontFile {
 .fileUploadLabel {
     display: flex;
     align-items: center;
-    width: 45px;
-    height: 44px;
+    width: 39px;
+    height: 38px;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -479,6 +480,8 @@ input#fontFile {
     transition: all .15s ease-in-out;
     user-select: none;
     z-index: 999;
+    margin: 3px;
+    border-radius: 5px;
 }
 
 .fileUploadLabel:hover {
@@ -1148,7 +1151,7 @@ details>summary:first-of-type {
     display: flex;
 }
 
-label[onclick="toggleDetails()"]::after {
+/* label[onclick="toggleDetails()"]::after {
     display: flex;
     content: '';
     font-family: 'SegoeFlunetIcons';
@@ -1157,24 +1160,35 @@ label[onclick="toggleDetails()"]::after {
     position: relative;
     margin-left: -16px;
     user-select: none;
+} */
+
+label[onclick="toggleDetails()"]::after {
+    display: flex;
+    content: '';
+    font-family: 'SegoeFlunetIcons';
+    opacity: 1;
+    transition: all 0.15s ease-in-out;
+    /* position: relative; */
+    margin-left: -1px;
+    user-select: none;
 }
 
-label[onclick="toggleDetails()"]::before {
+/* label[onclick="toggleDetails()"]::before {
     display: flex;
     content: '';
     font-family: 'SegoeFlunetIcons';
     opacity: 0;
     transition: all 0.15s ease-in-out;
     user-select: none;
-}
+} */
 
-details[open]+header label[onclick="toggleDetails()"]::after {
+/* details[open]+header label[onclick="toggleDetails()"]::after {
     opacity: 0;
 }
 
 details[open]+header label[onclick="toggleDetails()"]::before {
     opacity: 1;
-}
+} */
 
 @media screen and (max-width: 430px) {
     details {
@@ -1194,4 +1208,27 @@ details[open]+header label[onclick="toggleDetails()"]::before {
         padding-left: 20px;
         padding-right: 0px;
     }
+}
+
+details::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#fontPreview::-webkit-scrollbar {
+    width: 6px;
+    height: 1px;
+    margin: 8px;
+    border-radius: 10px;
+}
+
+details::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+#fontPreview::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    background: var(--text-color-25);
+}
+
+body::-webkit-scrollbar-track {
+    /* border-radius: 10px; */
+    background: var(--text-color-25);
+    -webkit-box-shadow: none;
 }
