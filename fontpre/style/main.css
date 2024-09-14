@@ -990,7 +990,7 @@ p#title {
     margin: 0;
 }
 
-@media screen and (max-width: 420px) {
+/* @media screen and (max-width: 420px) {
     .errorinfo {
         align-items: flex-start !important;
         background: white !important;
@@ -1006,7 +1006,7 @@ p#title {
         position: static !important;
         box-shadow: none !important;
     }
-}
+} */
 
 .errorinfo {
     width: 364px;
@@ -1122,15 +1122,15 @@ details {
     display: flex;
     position: fixed;
     background: #FFFFFF25 var(--size-color-bg);
-    left: 0px;
+    left: -300px;
     top: 44px;
     z-index: 1024;
-    max-width: 300px;
+    width: 300px;
     height: calc(100vh - 84px);
     padding: 20px;
     padding-right: 40px;
     border-right: solid 0px var(--text-color-25);
-    transition: all .15s ease-in-out;
+    transition: all .35s ease-in-out;
     overflow-y: auto;
     opacity: 0;
 }
@@ -1138,8 +1138,9 @@ details {
 details[open] {
     border-right: solid 1px var(--text-color-25);
     overflow-y: scroll;
-    min-width: 300px;
     opacity: 1;
+    left: 0px;
+    transition: all .35s ease-in-out;
 }
 
 details[open]+#content {
@@ -1150,34 +1151,6 @@ details[open]+#content {
 details>summary:first-of-type {
     display: flex;
 }
-
-/* details summary::after {
-    display: flex;
-    content: '';
-    font-family: 'SegoeFlunetIcons';
-    opacity: 1;
-    transition: all 0.15s ease-in-out;
-    position: relative;
-    margin-left: -16px;
-    user-select: none;
-}
-
-details summary::before {
-    display: flex;
-    content: '';
-    font-family: 'SegoeFlunetIcons';
-    opacity: 0;
-    transition: all 0.15s ease-in-out;
-    user-select: none;
-}
-
-details[open] summary::after {
-    opacity: 0;
-}
-
-details[open] summary::before {
-    opacity: 1;
-} */
 
 label[onclick="toggleDetails()"]::after {
     display: flex;
@@ -1205,4 +1178,16 @@ details[open]+header label[onclick="toggleDetails()"]::after {
 
 details[open]+header label[onclick="toggleDetails()"]::before {
     opacity: 1;
+}
+
+@media screen and (max-width: 400px) {
+    details {
+        left: -100%;
+        width: calc(100% - 100px);
+    }
+
+    details[open]+#content {
+        width: calc(100% - 0px);
+        margin-left: 0px;
+    }
 }
