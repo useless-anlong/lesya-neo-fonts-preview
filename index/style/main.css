@@ -1,47 +1,216 @@
 html {
     height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #262626;
+    }
+
+    :root {
+        --main-background: rgba(38, 38, 38, 0.5);
+        --card-background: rgba(255, 255, 255, 0.15);
+        --text-color: #FFFFFF;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --shadow-color-hover: rgba(0, 0, 0, 0.6);
+        --scrollbar-color: linear-gradient(180deg, rgba(255, 255, 255, 0) 5%, rgba(255, 255, 255, 0.175) 5.01%, rgba(255, 255, 255, 0.175) 94.99%, rgba(255, 255, 255, 0) 95%);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: #F4F3F3;
+    }
+
+    :root {
+        --card-background: #ffffff;
+        --main-background: rgba(255, 255, 255, 0.5);
+        --text-color: #000000;
+        --shadow-color: rgba(0, 0, 0, 0.05);
+        --shadow-color-hover: rgba(0, 0, 0, 0.1);
+        --scrollbar-color: linear-gradient(180deg, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.1) 5.01%, rgba(0, 0, 0, 0.1) 94.99%, rgba(0, 0, 0, 0) 95%);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    main {
+        margin-top: 264px;
+        width: calc(100% - 64px) !important;
+    }
+
+    .main {
+        z-index: auto;
+    }
+
+    #targetBox {
+        margin-bottom: 0px !important;
+    }
+
+    #targetBox.hovered {
+        margin-top: 0px !important;
+    }
+
+    .title {
+        margin-bottom: 0px;
+        margin-top: 32px;
+        position: fixed !important;
+        z-index: 2;
+        margin-top: 0;
+        backdrop-filter: blur(14px);
+        background-color: var(--main-background);
+        max-height: 218px;
+        height: 218px;
+    }
+
+    .toolShortcut {
+        height: 84px !important;
+        flex-direction: column !important;
+    }
+}
+
+.main::-webkit-scrollbar {
+    width: 6px;
+    height: 1px;
+    margin: 8px;
+    border-radius: 10px;
+}
+
+.main::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: none;
+    background: var(--scrollbar-color);
+}
+
+.main::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-end;
+    position: fixed;
+    max-width: 1000px;
+    overflow-y: scroll;
+    z-index: 5;
+    height: 100vh;
+    width: 100vw;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* padding: 32px; */
+    max-width: 1200px;
+    width: calc(50% - 64px);
+    padding: 32px;
+    /* margin-bottom: 32px; */
+    /* height: calc(100% - 64px); */
+    /* min-height: calc(100% - 128px); */
+    justify-content: center;
+    flex-wrap: wrap;
+    /* margin-bottom: 56px; */
+    align-content: flex-start;
+
 }
 
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     height: 100%;
     min-height: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     margin: 0;
+    width: 100%;
+    max-width: 1000px;
+    background-size: cover;
+    user-select: none;
+    color: var(--text-color);
+    overflow-y: hidden;
+    transition: all 0.2s ease;
 }
 
-footer {
+.title {
+    width: calc(100% - 80px);
+    padding: 40px;
+    margin-bottom: 32px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    position: fixed;
-    bottom: 20px;
-    background: rgba(56, 112, 227, 0.5);
-    border-radius: 20px;
-    padding: 4px;
-    box-shadow: rgba(56, 112, 227, 0) 0px 2px 0px;
-    backdrop-filter: blur(10px);
-    transition: all 0.25s ease;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: static;
 }
 
-footer:hover {
-    background: rgba(56, 112, 227, 1);
-    bottom: 22px;
-    box-shadow: rgba(56, 112, 227, 0.4) 0px 2px 10px;
+.title h1 {
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+span.emoji {
+    font-size: 24px;
+    margin-left: -2px;
+}
+
+#title {
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    opacity: 1;
+    z-index: 5;
+}
+
+#title.hovered {
+    margin-bottom: 164px;
+    opacity: 0;
+}
+
+#targetBox {
+    position: absolute;
+    margin-top: 164px;
+    transition: all 0.3s ease;
+    margin-bottom: 32px;
+    opacity: 0;
+    z-index: 5;
+}
+
+#targetBox.hovered {
+    margin-top: 32px;
+    opacity: 1;
+}
+
+#targetBox img {
+    width: 32px;
+}
+
+#targetBox h2 {
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+#toolContentBox {
+    width: 100%;
+    margin-top: 16px;
 }
 
 .toolShortcut {
-    height: 196px;
-    width: 196px;
+    height: 54px;
+    width: calc(50% - 4px);
     opacity: 1;
     border-radius: 15px;
-    border: 0.5px solid rgba(219, 219, 219, 1);
+    background-color: var(--card-background);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 16px 14px;
@@ -49,33 +218,58 @@ footer:hover {
     box-sizing: border-box;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 7px var(--shadow-color);
+    gap: 8px;
+    font-weight: 500;
+    color: var(--text-color);
 }
 
 .toolShortcut:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 12px var(--shadow-color-hover);
+}
+
+.toolShortcut svg path {
+    stroke: var(--text-color);
+}
+
+.toolShortcut img {
+    width: 20px;
+}
+
+.toolShortcut span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
 }
 
 .shortcutTitle {
-    width: 168px;
     font-size: 14px;
-    color: #333;
-    line-height: 1.2;
+    color: var(--text-color);
     margin: 0;
-    position: absolute;
-    margin-top: 148px;
+    text-align: center;
 }
 
-main {
+
+.designTool {
+    margin-block: unset !important;
+    margin-inline: unset !important;
+    padding-inline: unset !important;
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    padding: 32px;
-    max-width: 1200px;
-    min-height: calc(100% - 128px);
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    align-content: center;
-    margin-bottom: 56px;
+    align-content: flex-start;
+    gap: 8px;
+    width: 100%;
+}
+
+main h3 {
+    width: 100%;
+    padding: 14px 8px;
+    margin: 0;
+    opacity: 0.5;
 }

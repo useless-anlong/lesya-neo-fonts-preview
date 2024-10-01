@@ -137,6 +137,26 @@ body {
     user-select: none;
 }
 
+.a01 {
+    fill: var(--text-color);
+}
+
+.a02 {
+    fill: var(--text-color-75);
+}
+
+.a03 {
+    fill: var(--text-color-75);
+}
+
+.a04 {
+    fill: var(--text-color-50);
+}
+
+.a05 {
+    fill: var(--text-color-50);
+}
+
 #content {
     width: calc(100% - 40px);
     padding-left: 20px;

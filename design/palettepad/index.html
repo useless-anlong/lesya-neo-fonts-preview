@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调色板 - twinkle 工具集</title>
+    <link rel="stylesheet" type="text/css" href="./style/main.css">
+    <link rel="icon" type="image/png" href="./style/icon.png">
+</head>
+
+<body onload="pageloadOn()">
+    <header>
+        <label class="fileUploadLabel" title="返回首页" onclick="back()">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
+                height="15" viewBox="0 0 13.928362846374512 15">
+                <path id="logobottom"
+                    d="M7.72986,6.348574584960938L13.6845,9.803699584960938C13.9181,9.939199584960937,13.9977,10.238139584960937,13.8624,10.471639584960936L13.0406,11.889939584960938C12.9049,12.124039584960936,12.6049,12.203829584960937,12.3706,12.067929584960938L8.34065,9.729659584960938C8.28622,9.698099584960937,8.218,9.737279584960937,8.218,9.800159584960937L8.218,14.510859584960938C8.218,14.780969584960937,7.99872,14.999949584960937,7.72819,14.999949584960937L6.09124,14.999949584960937C5.82074,14.999949584960937,5.60142,14.780969584960937,5.60142,14.510859584960938L5.60142,9.863379584960938C5.60142,9.800519584960938,5.53321,9.761339584960938,5.47878,9.792879584960938L1.55782,12.067929584960938C1.32364,12.203829584960937,1.02347,12.124039584960936,0.887791,11.889939584960938L0.0659401,10.471639584960936C-0.0693803,10.238139584960937,0.0102265,9.939199584960937,0.243832,9.803699584960938L6.1986,6.348574584960938C6.70902,6.052408084960938,7.21945,6.052408084960938,7.72986,6.348574584960938Z"
+                    fill-rule="evenodd" fill-opacity="1" />
+                <path
+                    d="M8.218,5.19986L8.218,0.489175C8.218,0.218998,7.99872,0,7.72819,0L6.09124,0C5.82074,0,5.60142,0.218998,5.60142,0.489175L5.60142,5.13656C5.60142,5.19946,5.53321,5.23864,5.47878,5.20707L1.55782,2.93205C1.32364,2.79616,1.02347,2.87587,0.88779,3.11001L0.0659392,4.52836C-0.0693813,4.76189,0.0102255,5.06074,0.243831,5.19628L6.1986,8.65139C6.70902,8.94757,7.21945,8.94757,7.72986,8.65139L13.6845,5.19628C13.9181,5.06074,13.9977,4.76189,13.8624,4.52836L13.0406,3.11001C12.9049,2.87587,12.6049,2.79616,12.3706,2.93205L8.34065,5.27035C8.28622,5.30192,8.218,5.26271,8.218,5.19986Z"
+                    fill-rule="evenodd" fill-opacity="1" />
+            </svg>
+        </label>
+        <p id="title">
+            <img height="20" width="20" src="./style/icon.png" alt="小工具 Logo 图标">
+            调色盘
+        </p>
+    </header>
+    <main>
+        <div class="picker-container">
+            <div id="hue-picker" class="picker">
+                <div class="picker-indicator"></div>
+            </div>
+            <div id="saturation-brightness-picker" class="picker">
+                <div class="picker-indicator"></div>
+            </div>
+            <div id="alpha-slider">
+                <div class="slider-indicator"></div>
+            </div>
+        </div>
+        <div class="color-container">
+            <div id="color-preview"></div>
+            <div class="color-values">
+                <div class="color-box">
+                    <div class="valueBox">
+                        <span class="value-name">HEX</span>
+                        <span id="hex-value"></span>
+                    </div>
+                </div>
+                <div class="color-box">
+                    <div class="valueBox">
+                        <span class="value-name">RGB</span>
+                        <span id="rgb-value"></span>
+                    </div>
+                    <div class="alphaBox">
+                        <span class="value-name">alpha</span>
+                        <span id="rgb-alpha"></span>
+                    </div>
+                </div>
+                <div class="color-box">
+                    <div class="valueBox">
+                        <span class="value-name">HSL</span>
+                        <span id="hsl-value"></span>
+                    </div>
+                    <div class="alphaBox">
+                        <span class="value-name">alpha</span>
+                        <span id="hsl-alpha"></span>
+                    </div>
+                </div>
+                <div class="color-box">
+                    <div class="valueBox">
+                        <span class="value-name">HSB</span>
+                        <span id="hsb-value"></span>
+                    </div>
+                    <div class="alphaBox">
+                        <span class="value-name">alpha</span>
+                        <span id="hsb-alpha"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="shades"></div>
+    </main>
+    <div class="options">
+        <div class="tips">
+            轻点任何一项以复制
+        </div>
+        <div class="optionsMain">
+            <div>
+                <input type="checkbox" id="include-prefix" checked>
+                <label for="include-prefix"><span>复制色彩模式标识符</span>
+                    <p>例如 HEX 颜色前的 “#”</p>
+                </label>
+            </div>
+            <div>
+                <input type="checkbox" id="exclude-alpha" checked>
+                <label for="exclude-alpha"><span>不复制透明度信息</span>
+                    <p>在复制时移除 alpha 通道的数值</p>
+                </label>
+            </div>
+        </div>
+    </div>
+    <script src="./javascript/main.js">
+    </script>
+    <script src="../index/javascript/functions.js"></script>
+</body>
+
+</html>
