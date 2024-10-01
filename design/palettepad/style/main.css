@@ -26,7 +26,7 @@ main {
 
 @font-face {
     font-family: JetBrainsMono;
-    src: url(../../fonts/JetBrainsMono.ttf);
+    src: url(../../../fonts/JetBrainsMono.ttf);
 }
 
 @font-face {
@@ -35,8 +35,8 @@ main {
 }
 
 @font-face {
-    font-family: "SegoeFlunetIcons";
-    src: url(../../fonts/SegoeIcons.ttf);
+    font-family: SegoeFlunetIcons;
+    src: url(../../../fonts/SegoeIcons.ttf);
 }
 
 .color-picker {
