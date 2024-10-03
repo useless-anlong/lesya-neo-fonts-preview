@@ -4,36 +4,6 @@ html {
     justify-content: center;
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background: #262626;
-    }
-
-    :root {
-        --main-background: rgba(38, 38, 38, 0.5);
-        --card-background: rgba(255, 255, 255, 0.15);
-        --text-color: #FFFFFF;
-        --shadow-color: rgba(0, 0, 0, 0.3);
-        --shadow-color-hover: rgba(0, 0, 0, 0.6);
-        --scrollbar-color: linear-gradient(180deg, rgba(255, 255, 255, 0) 5%, rgba(255, 255, 255, 0.175) 5.01%, rgba(255, 255, 255, 0.175) 94.99%, rgba(255, 255, 255, 0) 95%);
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    body {
-        background: #F4F3F3;
-    }
-
-    :root {
-        --card-background: #ffffff;
-        --main-background: rgba(255, 255, 255, 0.5);
-        --text-color: #000000;
-        --shadow-color: rgba(0, 0, 0, 0.05);
-        --shadow-color-hover: rgba(0, 0, 0, 0.1);
-        --scrollbar-color: linear-gradient(180deg, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.1) 5.01%, rgba(0, 0, 0, 0.1) 94.99%, rgba(0, 0, 0, 0) 95%);
-    }
-}
-
 @media screen and (max-width: 500px) {
     body {
         flex-direction: column !important;
@@ -137,7 +107,7 @@ body {
     max-width: 1000px;
     background-size: cover;
     user-select: none;
-    color: var(--text-color);
+    color: var(--text-color-uni);
     overflow-y: hidden;
     transition: all 0.2s ease;
 }
@@ -150,12 +120,12 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    position: static;
+    position: relative;
 }
 
 .title h1 {
     font-weight: 400;
-    color: var(--text-color);
+    color: var(--text-color-uni);
 }
 
 span.emoji {
@@ -165,7 +135,7 @@ span.emoji {
 
 #title {
     transition: all 0.3s ease;
-    color: var(--text-color);
+    color: var(--text-color-uni);
     opacity: 1;
     z-index: 5;
 }
@@ -182,6 +152,8 @@ span.emoji {
     margin-bottom: 32px;
     opacity: 0;
     z-index: 5;
+    width: calc(100vw - 80px);
+    max-width: 1000px;
 }
 
 #targetBox.hovered {
@@ -195,7 +167,7 @@ span.emoji {
 
 #targetBox h2 {
     font-weight: 400;
-    color: var(--text-color);
+    color: var(--text-color-uni);
 }
 
 #toolContentBox {
@@ -221,7 +193,7 @@ span.emoji {
     box-shadow: 0 1px 7px var(--shadow-color);
     gap: 8px;
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--text-color-uni);
 }
 
 .toolShortcut:hover {
@@ -230,7 +202,7 @@ span.emoji {
 }
 
 .toolShortcut svg path {
-    stroke: var(--text-color);
+    stroke: var(--text-color-uni);
 }
 
 .toolShortcut img {
@@ -247,7 +219,7 @@ span.emoji {
 
 .shortcutTitle {
     font-size: 14px;
-    color: var(--text-color);
+    color: var(--text-color-uni);
     margin: 0;
     text-align: center;
 }

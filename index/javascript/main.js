@@ -1,12 +1,35 @@
 var href = window.location.href;
 
+window.addEventListener('load', function () {
+    const mainElement = document.querySelector('.main');
+    const titleElement = document.querySelector('.title');
+
+    mainElement.style.bottom = '0px';
+    titleElement.style.top = '0px';
+    mainElement.style.opacity = '1';
+    titleElement.style.opacity = '1';
+    mainElement.style.transition = 'bottom 0.35s ease-in, opacity 0.3s ease-out';
+    titleElement.style.transition = 'top 0.35s ease-in, opacity 0.3s ease-out';
+});
+
 function start(element) {
-    var id = element.id;
-    var classify = element.getAttribute('data-classify');
-    var replaceLink = href + classify + '/' + id + '/'
-    // console.log(`ID: ${id}, CLASSIFY: ${classify}, Href: ${href}, ReplaceLink: ${replaceLink}`)
-    window.location.replace(replaceLink);
-}
+        var id = element.id;
+        var classify = element.getAttribute('data-classify');
+        // var replaceLink = href + classify + '/' + id + '/'
+        // console.log(`ID: ${id}, CLASSIFY: ${classify}, Href: ${href}, ReplaceLink: ${replaceLink}`)
+        const mainElement = document.querySelector('.main');
+        const titleElement = document.querySelector('.title');
+
+        mainElement.style.bottom = '164px';
+        titleElement.style.top = '-96px';
+        mainElement.style.opacity = '0';
+        titleElement.style.opacity = '0';
+
+        setTimeout(() => {
+            // window.location.href = `${href}${classify}/${id}/`;
+            window.location.replace(`${href}${classify}/${id}/`);
+        }, 400);
+    }
 
 const titleContent = {
     'fontpre': '<h2>不仅可以预览字体，<br>还能浏览、测试字体特性、可变属性。</h2>',

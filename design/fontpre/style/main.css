@@ -8,8 +8,36 @@
     src: url("../../../fonts/JetBrainsMono.ttf");
 }
 
+/* back-to-home {
+    --backicon-bg: #D6C47A;
+    --backicon-color: #fff9e8;
+} */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #ffffff;
+        --text-color-75: rgba(255, 255, 255, 0.75);
+        --text-color-50: rgba(255, 255, 255, 0.5);
+        --text-color-25: rgba(255, 255, 255, 0.25);
+        --color-bg: #262626;
+        --backicon-bg: #D6C47A;
+        --backicon-color: #fff9e8;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --text-color: #000000;
+        --text-color-75: rgba(0, 0, 0, 0.5);
+        --text-color-50: rgba(0, 0, 0, 0.35);
+        --text-color-25: rgba(0, 0, 0, 0.1);
+        --color-bg: #F4F3F3;
+        --backicon-bg: #D6C47A;
+        --backicon-color: #fff9e8;
+    }
+}
+
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 20px;
@@ -23,11 +51,15 @@ body {
     gap: 20px;
 }
 
+#loadedFontName,
+#fontSelect {
+    display: none;
+}
+
 .axis-control {
     width: 300px;
     position: relative;
     margin: 20px 0;
-    font-family: Arial, sans-serif;
 }
 
 .axis-control label {
@@ -172,12 +204,13 @@ body {
 
 #testText {
     width: 100%;
-    height: 150px;
+    height: 132px;
+    max-height: 196px;
     border: unset;
-    resize: unset;
+    resize: vertical;
     margin: 0;
     margin-left: -8px;
-    margin-top: -150px;
+    /* margin-top: -150px; */
     padding: 26px 8px 7px 8px;
     border-bottom: solid 1px var(--text-color-25);
     /* border-radius: 6px; */
@@ -185,9 +218,9 @@ body {
     color: var(--selected-color, inherit);
     font-feature-settings: var(--font-feature-settings, normal);
     font-variation-settings: var(--font-variation-settings, normal);
-    background: var(--size-color-bg);
+    background: var(--color-bg);
     position: sticky;
-    top: 44px;
+    top: 0px;
     z-index: 997;
     transition: top 0.25s ease-in-out;
     outline: none;
@@ -226,7 +259,7 @@ body {
     height: 172px;
     text-align: right;
     color: var(--text-color-50);
-    background: var(--size-color-bg);
+    background: var(--color-bg);
     user-select: none;
     position: absolute;
     margin-left: -8px;
@@ -440,31 +473,41 @@ body {
     user-select: none;
 }
 
-header {
-    height: 44px;
-    width: calc(100% - 164px);
+footer {
+    /* height: 44px; */
+    width: 100VW;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    border-bottom: solid 1px var(--text-color-25);
+    /* border-top: solid 1px var(--text-color-25); */
     -webkit-app-region: drag;
     display: flex;
     flex-direction: row;
-    padding-left: 148px;
-    padding-right: 16px;
+    padding: 16px 0;
+    /* padding-right: 16px; */
     align-items: center;
-    backdrop-filter: blur(50px);
     z-index: 2096;
-    opacity: 0;
-    margin-top: -44px;
+    /* opacity: 0; */
+    /* margin-top: -44px; */
     transition: all 0.2s ease-in-out 0.35s;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 12px;
 }
 
-header svg path {
+footer svg path {
     fill: var(--text-color-75);
     transition: all 0.15s ease-in-out 0.35s;
+}
+
+.footerMain {
+    display: flex;
+    gap: 16px;
+    padding: 6px;
+    /* background: rgba(255, 255, 255, 0.15); */
+    background: var(--text-color-25);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
 }
 
 #logobottom {
@@ -472,45 +515,38 @@ header svg path {
 }
 
 input#fontFile {
-    display: flex;
-    align-items: center;
-    width: 1px;
-    height: 1px;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    -webkit-app-region: no-drag;
-    opacity: 0;
+    display: none;
 }
 
 .fileUploadLabel {
+    border: unset;
+    padding: 0px;
+    height: 32px;
+    width: 52px;
+    transition: background 0.25s ease-in-out;
+    background: unset;
+    border-radius: 6px;
     display: flex;
     align-items: center;
-    width: 39px;
-    height: 38px;
     justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    -webkit-app-region: no-drag;
-    opacity: 1;
-    font-family: SegoeFlunetIcons;
-    font-size: 14px;
-    transition: all .15s ease-in-out;
+    font-family: "SegoeFlunetIcons";
     user-select: none;
-    z-index: 999;
-    margin: 3px;
-    border-radius: 5px;
 }
 
 .fileUploadLabel:hover {
-    background: var(--text-color-25);
+    background: var(--backicon-bg, currentColor);
 }
+
+/* .fileUploadLabel::after {
+    content: '';
+    position: relative;
+    right: -16px;
+    height: 15px;
+    transition: border 0.25s ease-in-out;
+} */
 
 p#title {
     margin: 0;
-    font-family: system-ui !important;
     font-size: 14px;
     user-select: none;
     display: flex;
@@ -520,11 +556,6 @@ p#title {
 
 #title #bg {
     fill: var(--text-color-25);
-}
-
-#fontSelect {
-    transform: scale(0);
-    opacity: 0;
 }
 
 #fontColor {
@@ -733,10 +764,6 @@ p#title {
     }
 }
 
-/* input#fontSize {
-            pointer-events: none;
-        } */
-
 #fontSize {
     height: 33px;
     margin: 0;
@@ -763,24 +790,37 @@ p#title {
 }
 
 .fileUploadLabelBtn {
-    padding: 1px 12px 6px 10px;
-    background: transparent;
-    border-radius: 6px;
-    border: solid 1px var(--text-color-25);
-    border-bottom: solid 2px var(--text-color-25);
-    font-size: 14px;
-    transition: all 0.15s ease-in-out;
-    user-select: none;
-    margin-top: 20px;
+    height: 48px;
+    width: 164px;
+    opacity: 1;
+    border-radius: 8px;
+    background-color: var(--card-background);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 8px 2px 10px;
+    transform: translateY(0px);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 7px var(--shadow-color);
+    gap: 8px;
+    /* font-weight: 500; */
+    color: var(--text-color-uni);
+    font-size: 15px;
+    margin-left: -2px;
+    position: absolute;
+    margin-top: 396px;
 }
 
 .fileUploadLabelBtn::before {
     content: '';
     font-family: "SegoeFlunetIcons";
     font-size: 17px;
-    margin-right: 5px;
+    margin-right: 2px;
     position: relative;
-    top: 3px;
+    /* top: 1px; */
     transition: all 0.2s ease-in-out;
     opacity: 1;
 }
@@ -790,9 +830,8 @@ p#title {
 }
 
 .fileUploadLabelBtn:hover {
-    background: var(--text-color-25);
-    border: solid 1px var(--text-color-50);
-    border-bottom: solid 2px var(--text-color-50);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 12px var(--shadow-color-hover);
 }
 
 .fileUploadLabelBtn::after {
@@ -801,8 +840,8 @@ p#title {
     transition: all 0.25s ease-in-out;
     opacity: 0;
     position: absolute;
-    margin-top: 3px;
-    margin-left: -106px;
+    /* margin-top: 2px; */
+    margin-left: -99px;
     font-size: 17px;
 }
 
@@ -810,16 +849,41 @@ p#title {
     opacity: 1;
 }
 
+@media screen and (max-width: 500px) {
+    #welcome {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        top: calc(50% - 164px) !important;
+    }
+
+    main div {
+        width: 100% !important;
+    }
+
+    /* main:first-child {
+        padding: 6px;
+    } */
+
+    main:nth-child(2) {
+        padding: 6px;
+    }
+}
+
 #welcome {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     position: fixed;
     z-index: 1001;
-    top: calc(50% - 128px);
-    color: var(--text-color);
-    opacity: 1;
-    transition: all 0.15s ease-in-out 0.35s;
+    top: calc(70% - 128px);
+    color: var(--text-color-uni);
+    opacity: 0;
+    transition: top 0.35s ease-in-out, opacity 0.15s ease-out 0.1s, margin-top 0.25s ease-in-out;
+    justify-content: center;
+    padding: 32px;
+    width: calc(100vw - 64px);
+    max-width: calc(1000px - 64px);
+    user-select: none;
 }
 
 #welcome code {
@@ -843,16 +907,13 @@ p#title {
 #welcome h1 {
     user-select: none;
     margin: 0;
-    margin-bottom: 12px;
+    font-weight: normal;
+    line-height: 36px;
 }
 
 #welcome p {
     user-select: none;
     margin: 0;
-    /* margin-bottom: 10px; */
-    padding-left: 22px;
-    padding-right: 22px;
-    text-align: center;
 }
 
 #welcome .icon {
@@ -921,7 +982,7 @@ p#title {
 }
 
 .whgtinfo p {
-    font-family: system-ui;
+
     font-size: 14px;
     margin: 0;
 }
@@ -979,7 +1040,7 @@ p#title {
     position: absolute;
     font-size: 14px;
     font-weight: 400;
-    font-family: system-ui;
+
     color: var(--text-color-50);
     margin-top: -50px;
     margin-left: -52px;
@@ -1104,7 +1165,6 @@ p#title {
 }
 
 .errorinfo p {
-    font-family: system-ui;
     font-size: 14px;
     margin: 0;
 }
@@ -1140,12 +1200,12 @@ details {
     display: flex;
     position: fixed;
     background: #FFFFFF25;
-    background: var(--size-color-bg);
+    background: var(--color-bg);
     left: -300px;
-    top: 44px;
+    top: 0;
     z-index: 1024;
     width: 300px;
-    height: calc(100vh - 84px);
+    height: calc(100vh - 40px);
     padding: 20px;
     padding-right: 40px;
     border-right: solid 0px var(--text-color-25);
@@ -1171,6 +1231,15 @@ details>summary:first-of-type {
     display: flex;
 }
 
+/* details[open]+footer #detailsContol.fileUploadLabel {
+    background: var(--backicon-bg);
+} */
+
+.fileUploadLabel.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 /* label[onclick="toggleDetails()"]::after {
     display: flex;
     content: '';
@@ -1193,6 +1262,12 @@ label[onclick="toggleDetails()"]::after {
     user-select: none;
 }
 
+.labelBox {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
 /* label[onclick="toggleDetails()"]::before {
     display: flex;
     content: '';
@@ -1202,11 +1277,11 @@ label[onclick="toggleDetails()"]::after {
     user-select: none;
 } */
 
-/* details[open]+header label[onclick="toggleDetails()"]::after {
+/* details[open]+footer label[onclick="toggleDetails()"]::after {
     opacity: 0;
 }
 
-details[open]+header label[onclick="toggleDetails()"]::before {
+details[open]+footer label[onclick="toggleDetails()"]::before {
     opacity: 1;
 } */
 
@@ -1224,8 +1299,8 @@ details[open]+header label[onclick="toggleDetails()"]::before {
     }
 
     #content {
-        width: calc(100% - 20px);
-        padding-left: 20px;
+        width: 100%;
+        padding-left: 0px;
         padding-right: 0px;
     }
 }
