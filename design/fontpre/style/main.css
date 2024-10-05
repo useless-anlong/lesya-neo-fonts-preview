@@ -500,6 +500,7 @@ footer svg path {
     background: var(--text-color-25);
     border-radius: 12px;
     backdrop-filter: blur(20px);
+    align-items: center;
 }
 
 #logobottom {
@@ -980,11 +981,27 @@ p#title {
 #font-info code {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 12px;
-    font-family: 'JetBrainsMono', system-ui;
+    font-family: 'JetBrainsMono', var(--font-family-default);
     font-size: 14px;
+    font-weight: 400;
     line-height: 25px;
+}
+
+#font-info code span, .variableInfoBox span {
+    width: 84px;
+    min-width: 84px;
+    font-weight: 300;
+    opacity: 0.75;
+}
+
+.variableInfoBox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
 }
 
 .goback {

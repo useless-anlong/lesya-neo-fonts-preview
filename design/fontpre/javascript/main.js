@@ -288,6 +288,16 @@ function copyContent(element) {
     document.body.removeChild(textarea);
 }
 
+function copyTextToClipboard(element) {
+    const textToCopy = element.textContent;
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+}
+
 async function loadFontInfo(file) {
     try {
         const arrayBuffer = await file.arrayBuffer();
@@ -296,14 +306,14 @@ async function loadFontInfo(file) {
         let info = '';
 
         const nameTable = font.tables.name;
-        info += `<div class="info-title"><h3>${nameTable.fontFamily.en || '未知'}</h3><span>字体详细信息</span></div>`;
-        info += `<code>全称: ${nameTable.fullName.en || '未知'}<br>`;
-        info += `子系列名称: ${nameTable.fontSubfamily.en || '未知'}<br>`;
-        info += `版本: ${nameTable.version.en || '未知'}<br>`;
-        info += `版权: ${nameTable.copyright.en || '未知'}<br>`;
-        info += `设计师: ${nameTable.designer.en || '未知'}<br>`;
-        info += `供应商: ${nameTable.manufacturer.en || '未知'}<br>`;
-
+        info += `<div class="info-title"><h3>${nameTable.fontFamily.en || '未知'}</h3><span>字体详细信息 (轻点任意一项以复制)</span></div>`;
+        info += `<code><span>全名</span><div onclick="copyTextToClipboard(this)">${nameTable.fullName.en || '未知'}</div></code>`;
+        info += `<code><span>子系列名称</span><div onclick="copyTextToClipboard(this)">${nameTable.fontSubfamily.en || '未知'}</div></code>`;
+        info += `<code><span>字体版本</span><div onclick="copyTextToClipboard(this)">${nameTable.version.en || '未知'}</div></code>`;
+        info += `<code><span>版权</span><div onclick="copyTextToClipboard(this)">${nameTable.copyright.en || '未知'}</div></code>`;
+        info += `<code><span>设计师</span><div onclick="copyTextToClipboard(this)">${nameTable.designer.en || '未知'}</div></code>`;
+        info += `<code><span>供应商</span><div onclick="copyTextToClipboard(this)">${nameTable.manufacturer.en || '未知'}</div></code>`;
+        
         const weightClass = font.tables.os2.usWeightClass;
         let weightName;
 
@@ -326,15 +336,17 @@ async function loadFontInfo(file) {
         }
 
         if (font.tables.fvar) {
-            info += '可变字体轴:<br>';
+            info += '<div class="variableInfoBox"><span>可变轴信息</span>';
+            info += '<div>';
             font.tables.fvar.axes.forEach(axis => {
-                info += `  - ${axis.tag}: 由 ${axis.minValue}, 至 ${axis.maxValue}, 默认为 ${axis.defaultValue}<br>`;
+                info += `  <code><div onclick="copyTextToClipboard(this)">${axis.tag}: 最小为 ${axis.minValue} > 默认为 ${axis.defaultValue} > 最大为 ${axis.maxValue}</div></code>`;
             });
+            info += '</div></div>';
         } else {
-            info += `字重: ${weightClass} `;
+            info += `<code><span>字重</span><div onclick="copyTextToClipboard(this)">${weightClass}</div></code>`;
         }
 
-        info += `</code>`;
+        // info += `</code>`;
 
         fontInfoDiv.innerHTML = info;
     } catch (error) {
