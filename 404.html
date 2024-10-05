@@ -8,6 +8,59 @@
 </head>
 
 <body style="opacity: 1;">
+    <style>
+        h1 {
+            margin: 0;
+            font-size: 128px;
+            line-height: 118px;
+            font-family: JetBrains Mono;
+            font-weight: 500;
+            color: var(--text-color-uni-50);
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        h1 span {
+            font-weight: 200;
+        }
+
+        h1 div {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        body {
+            height: calc(100vh - 64px);
+            width: calc(100vw - 64px);
+            margin: 0;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        p {
+            color: var(--text-color-uni-50);
+            user-select: none;
+        }
+
+        p span {
+            color: var(--text-color-uni);
+            user-select: none;
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+        main {
+            padding: 16px;
+        }
+    </style>
+
     <h1>
         <div>
             <h1 style="opacity: 0.5;">ERROR</h1>
@@ -24,24 +77,22 @@
         </p>
         <twinkle-button onclick="goHome()">回到首页</twinkle-button>
     </main>
+
     <script>
-        var style = document.createElement("link");
         var univar = document.createElement("link");
+        var webicon = document.createElement("link");
         var link = window.location.origin;
         var head = document.getElementsByTagName("head")[0];
 
-        style.rel = "stylesheet";
-        style.type = "text/css";
-        style.href = `${link}/index/style/notfound.css`;
         univar.rel = "stylesheet";
         univar.type = "text/css";
         univar.href = `${link}/index/style/univar.css`;
+        webicon.rel = "stylesheet";
+        webicon.type = "text/css";
+        webicon.href = `${link}/icon.png`;
 
-        // var style = document.getElementsByTagName("head")[0];
-        // var univar = document.getElementsByTagName("head")[0];
-
-        head.appendChild(style);
         head.appendChild(univar);
+        head.appendChild(webicon);
 
         var script = document.createElement("script");
         script.type = "text/javascript";
