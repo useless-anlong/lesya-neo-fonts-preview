@@ -34,6 +34,17 @@ body {
 }
 
 p {
+    color: var(--text-color-uni-50);
+    user-select: none;
+}
+
+p span {
     color: var(--text-color-uni);
     user-select: none;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+main {
+    padding: 16px;
 }

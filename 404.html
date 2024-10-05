@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./index/style/notfound.css">
-    <link rel="stylesheet" type="text/css" href="./index/style/univar.css">
     <title>出错啦 - twinkle 工具集</title>
 </head>
 
@@ -26,8 +24,30 @@
         </p>
         <twinkle-button onclick="goHome()">回到首页</twinkle-button>
     </main>
-    <script src="./index/javascript/functions.js"></script>
     <script>
+        var style = document.createElement("link");
+        var univar = document.createElement("link");
+        var link = window.location.origin;
+        var head = document.getElementsByTagName("head")[0];
+
+        style.rel = "stylesheet";
+        style.type = "text/css";
+        style.href = `${link}/index/style/notfound.css`;
+        univar.rel = "stylesheet";
+        univar.type = "text/css";
+        univar.href = `${link}/index/style/univar.css`;
+
+        // var style = document.getElementsByTagName("head")[0];
+        // var univar = document.getElementsByTagName("head")[0];
+
+        head.appendChild(style);
+        head.appendChild(univar);
+
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = `${link}/index/javascript/functions.js`;
+        head.appendChild(script);
+
         function goHome() {
             setTimeout(() => {
                 const body = document.querySelector('body');
