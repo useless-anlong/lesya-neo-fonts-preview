@@ -4,6 +4,15 @@ html {
     justify-content: center;
 }
 
+:root {
+    --card-margin-top: calc((var(--card-height) + 12px) - ((var(--card-height) + 32px) * 2));
+}
+
+body {
+    opacity: 0;
+    transition: all 0.5s ease 0.2s;
+}
+
 @media screen and (max-width: 500px) {
     body {
         flex-direction: column !important;
@@ -68,18 +77,17 @@ html {
     align-items: flex-start;
     align-content: flex-start;
     justify-content: flex-end;
-    position: fixed;
     max-width: 1000px;
     overflow-y: scroll;
     z-index: 5;
-    height: 100vh;
     width: 100vw;
+    max-height: 100vh;
+    position: relative;
 }
 
 main {
     display: flex;
     flex-direction: row;
-    gap: 10px;
     /* padding: 32px; */
     max-width: 1200px;
     width: calc(50% - 64px);
@@ -113,14 +121,16 @@ body {
 }
 
 .title {
-    width: calc(100% - 80px);
+    width: calc(100vw - 80px);
+    max-width: calc(1000px - 80px);
     padding: 40px;
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    position: relative;
+    position: fixed;
+    height: calc(100vh - 128px);
 }
 
 .title h1 {
@@ -152,8 +162,8 @@ span.emoji {
     margin-bottom: 32px;
     opacity: 0;
     z-index: 5;
-    width: calc(100vw - 80px);
-    max-width: 1000px;
+    width: calc(50vw - 80px);
+    max-width: 400px;
 }
 
 #targetBox.hovered {
@@ -243,5 +253,250 @@ main h3 {
     width: 100%;
     padding: 14px 8px;
     margin: 0;
+    opacity: 0.65;
+    font-family: var(--font-family-default);
+    font-weight: 400;
+}
+
+.headerTips {
+    width: 100%;
+    opacity: 1;
+    border-radius: 15px;
+    background-color: var(--card-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transform: translateY(0px) scale(1);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 7px var(--shadow-color);
+    overflow: hidden;
+    font-weight: 500;
+    color: var(--text-color-uni);
+}
+
+.headerTips:hover {
+    transform: translateY(-2px) scale(1);
+    box-shadow: 0 3px 12px var(--shadow-color-hover);
+}
+
+.tipsMain {
+    padding: 4px 16px 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: calc(100% - 32px);
+    gap: 12px;
+}
+
+p.tipsTitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+span.tipsText {
+    margin: 0;
+    opacity: 0.65;
+
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.tipsMain img {
+    width: 20px;
+}
+
+.coverimage {
+    background-size: cover;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .coverimage.main {
+        background-image: url('../img/cover-dark.png')
+    }
+
+    .headerTips:hover .coverimage.main {
+        background-image: url('../img/cover-dark-hover.png')
+    }
+
+    .coverimage.fontpre {
+        background-image: url('../img/fontpre-dark.png')
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .coverimage.main {
+        background-image: url('../img/cover-light.png')
+    }
+
+    .headerTips:hover .coverimage.main {
+        background-image: url('../img/cover-light-hover.png')
+    }
+
+    .coverimage.fontpre {
+        background-image: url('../img/fontpre-light.png')
+    }
+}
+
+.close-carousel {
+    font-family: "SegoeFlunetIcons";
+    font-size: 7px;
+    padding: unset;
+    border: none;
+    width: 19px;
+    height: 19px;
+    border-radius: 19px;
+    background: var(--on-card-background);
+    color: var(--text-color-uni-50);
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 7px var(--shadow-color);
+    /* transform: translateY(0px); */
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    gap: 8px;
+    padding-left: 6px;
+    /* padding-bottom: 0.5px; */
+}
+
+.close-carousel:hover {
+    /* transform: translateY(-2px); */
+    box-shadow: 0 1px 7px var(--shadow-color-hover);
+    width: 104px;
+}
+
+.close-carousel p {
+    transform: translateY(-0.5px);
+    transition: all 0.3s ease;
+    transform-origin: center left;
+    font-size: 13px;
+    white-space: nowrap;
+    margin: 0;
+    font-family: var(--font-family-default);
+    font-weight: 300;
+}
+
+/* .close-carousel:hover p {
+    transform: scaleX(1);
+} */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    transition: margin-top 0.65s cubic-bezier(0, 0, 0, 1), opacity 0.4s ease;
+    margin-top: 0px;
+    opacity: 1;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: calc(var(--card-height) + 12px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    height: var(--card-height);
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    z-index: 3;
+}
+
+#prevBtn,
+#nextBtn {
+    font-family: "SegoeFlunetIcons";
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 8px;
+    height: var(--card-height);
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+
+#nextBtn {
+    right: -10px;
+}
+
+#prevBtn {
+    left: -10px;
+}
+
+#nextBtn:hover {
+    opacity: 0.75;
+    right: 0px;
+}
+
+#prevBtn:hover {
+    left: 0px;
+    opacity: 0.75;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-indicators span.active {
+    background-color: var(--text-color-uni);
+    width: 24px;
+    opacity: 0.75;
+}
+
+.carousel-indicators span {
+    width: 8px;
+    height: 4px;
+    background-color: var(--text-color-uni);
+    border-radius: 4px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
     opacity: 0.5;
 }

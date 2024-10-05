@@ -1,35 +1,27 @@
+const body = document.querySelector('body');
 var href = window.location.href;
 
-window.addEventListener('load', function () {
+const closeBtn = document.querySelector('.closeBtn');
+const headerTips = document.querySelector('.headerTips');
+
+function start(element) {
+    var id = element.id;
+    var classify = element.getAttribute('data-classify');
+    // var replaceLink = href + classify + '/' + id + '/'
+    // console.log(`ID: ${id}, CLASSIFY: ${classify}, Href: ${href}, ReplaceLink: ${replaceLink}`)
     const mainElement = document.querySelector('.main');
     const titleElement = document.querySelector('.title');
 
-    mainElement.style.bottom = '0px';
-    titleElement.style.top = '0px';
-    mainElement.style.opacity = '1';
-    titleElement.style.opacity = '1';
-    mainElement.style.transition = 'bottom 0.35s ease-in, opacity 0.3s ease-out';
-    titleElement.style.transition = 'top 0.35s ease-in, opacity 0.3s ease-out';
-});
+    mainElement.style.bottom = '164px';
+    titleElement.style.top = '-96px';
+    mainElement.style.opacity = '0';
+    titleElement.style.opacity = '0';
 
-function start(element) {
-        var id = element.id;
-        var classify = element.getAttribute('data-classify');
-        // var replaceLink = href + classify + '/' + id + '/'
-        // console.log(`ID: ${id}, CLASSIFY: ${classify}, Href: ${href}, ReplaceLink: ${replaceLink}`)
-        const mainElement = document.querySelector('.main');
-        const titleElement = document.querySelector('.title');
-
-        mainElement.style.bottom = '164px';
-        titleElement.style.top = '-96px';
-        mainElement.style.opacity = '0';
-        titleElement.style.opacity = '0';
-
-        setTimeout(() => {
-            // window.location.href = `${href}${classify}/${id}/`;
-            window.location.replace(`${href}${classify}/${id}/`);
-        }, 400);
-    }
+    setTimeout(() => {
+        // window.location.href = `${href}${classify}/${id}/`;
+        window.location.replace(`${href}${classify}/${id}/`);
+    }, 400);
+}
 
 const titleContent = {
     'fontpre': '<h2>不仅可以预览字体，<br>还能浏览、测试字体特性、可变属性。</h2>',
@@ -124,4 +116,78 @@ titleElement.addEventListener('scroll', function () {
     const scrollPercentage = this.scrollTop / titleHeight;
     const mainScrollPosition = scrollPercentage * mainHeight;
     mainElement.scrollTop = mainScrollPosition;
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const carouselContainer = document.querySelector('.carousel-container');
+    const items = document.querySelectorAll('.carousel-item');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicators = document.querySelectorAll('.carousel-indicators span');
+    const closeBtn = document.querySelector('.close-carousel');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        if (index < 0) {
+            currentIndex = items.length - 1;
+        } else if (index >= items.length) {
+            currentIndex = 0;
+        } else {
+            currentIndex = index;
+        }
+        items.forEach((item, i) => {
+            item.classList.toggle('active', i === currentIndex);
+        });
+        updateIndicators();
+    }
+
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => showSlide(index));
+    });
+
+    closeBtn.addEventListener('click', () => {
+        carouselContainer.style.marginTop = 'var(--card-margin-top)';
+        carouselContainer.style.opacity = '0';
+
+        setTimeout(() => {
+            carouselContainer.remove();
+        }, "650")
+    });
+});
+
+window.addEventListener('load', function () {
+    const mainElement = document.querySelector('.main');
+    const titleElement = document.querySelector('.title');
+
+    mainElement.style.bottom = '0px';
+    titleElement.style.top = '0px';
+    mainElement.style.opacity = '1';
+    titleElement.style.opacity = '1';
+    mainElement.style.transition = 'bottom 0.35s ease-in, opacity 0.3s ease-out';
+    titleElement.style.transition = 'top 0.35s ease-in, opacity 0.3s ease-out';
+
+    body.style.opacity = '1';
+
+    const card = document.querySelector('.carousel-item.active');
+
+    const resizeObserver = new ResizeObserver(entries => {
+        for (const entry of entries) {
+            if (entry.target === card) {
+                // 获取元素高度并设置到 CSS 变量中
+                const height = entry.contentRect.height;
+                document.documentElement.style.setProperty('--card-height', `${height}px`);
+            }
+        }
+    });
+
+    resizeObserver.observe(card);
 });

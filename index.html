@@ -23,6 +23,45 @@
     </div>
     <div class="main">
         <main>
+            <div class="carousel-container">
+                <button class="close-carousel"><p>关闭轮播模块</p></button>
+                <div class="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="headerTips">
+                                <div class="coverimage main"></div>
+                                <div class="tipsMain">
+                                    <img src="./index/img/ui-icon.png">
+                                    <div class="tipsTitleBox">
+                                        <p class="tipsTitle">全新 UI 现已登场</p>
+                                        <span class="tipsText">新增暗色模式、过场动画、问候语等众多特性</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="headerTips">
+                                <div class="coverimage fontpre"></div>
+                                <div class="tipsMain">
+                                    <img src="./design/fontpre/style/icon.png">
+                                    <div class="tipsTitleBox">
+                                        <p class="tipsTitle">来给你的字体拍个X光片</p>
+                                        <span class="tipsText">看一看、试一试字体的可变、OpenType特性</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="carousel-nav"> -->
+                    <button id="prevBtn"></button>
+                    <button id="nextBtn"></button>
+                    <!-- </div> -->
+                    <div class="carousel-indicators">
+                        <span class="active" data-index="0"></span>
+                        <span data-index="1"></span>
+                    </div>
+                </div>
+            </div>
             <div class="design" id="toolContentBox">
                 <h3>设计工具集</h3>
                 <ol class="designTool">
@@ -37,7 +76,7 @@
                 </ol>
             </div>
             <div class="toolShortcut"
-                style="width: 100%; pointer-events: none; opacity: 0.5; background-color: unset; box-shadow: none; flex-direction: column; height: auto;">
+                style="padding-top: 24px; width: 100%; pointer-events: none; opacity: 0.5; background-color: unset; box-shadow: none; flex-direction: column; height: auto;">
                 <!-- <img src="./iconShortcut.png"> -->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22"
                     height="22" viewBox="0 0 22 22" fill="none">
