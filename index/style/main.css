@@ -30,6 +30,8 @@ body {
 
     #targetBox {
         margin-bottom: 0px !important;
+        width: calc(100vw - 80px) !important;
+        max-width: 1000px !important;
     }
 
     #targetBox.hovered {
@@ -51,6 +53,11 @@ body {
     .toolShortcut {
         height: 84px !important;
         flex-direction: column !important;
+    }
+
+    footer {
+        pointer-events: none;
+        opacity: 0 !important;
     }
 }
 
@@ -499,4 +506,21 @@ span.tipsText {
     cursor: pointer;
     transition: all 0.3s ease;
     opacity: 0.5;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.1;
+    padding: 24px;
+}
+
+footer p {
+    font-size: 10px;
+    margin: 0;
+}
+
+footer a {
+    color: var(--text-color-uni)
 }
