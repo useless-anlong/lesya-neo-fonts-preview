@@ -132,3 +132,55 @@ window.addEventListener('load', function () {
         }
     }
 });
+
+class Button extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+        this.render();
+        // 移除了对 this.addEventListeners() 的调用
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+        <style>
+            button {
+                height: 48px;
+                width: 164px;
+                opacity: 1;
+                border-radius: 8px;
+                background-color: var(--card-background, currentColor);
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 0px 10px 2px 10px;
+                transform: translateY(0px);
+                box-sizing: border-box;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 1px 7px var(--shadow-color, currentColor);
+                gap: 8px;
+                color: var(--text-color-uni);
+                font-size: 15px;
+                margin-left: -2px;
+                border: none;
+                font-family: var(--font-family-default, currentColor);
+                user-select: none;
+            }
+
+            button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 3px 12px var(--shadow-color-hover, currentColor);
+            }
+        </style>
+        <button><slot></slot></button>
+      `;
+    }
+}
+
+// 注册自定义元素
+customElements.define('twinkle-button', Button);

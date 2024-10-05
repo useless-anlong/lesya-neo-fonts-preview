@@ -4,98 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出错啦 - Lesya Neo 工具集</title>
+    <link rel="stylesheet" type="text/css" href="./index/style/notfound.css">
+    <link rel="stylesheet" type="text/css" href="./index/style/univar.css">
+    <title>出错啦 - twinkle 工具集</title>
 </head>
 
-<body>
-    <style>
-        @font-face {
-            font-family: "SegoeFlunetIcons";
-            src: url("../fonts/SegoeIcons.ttf");
-        }
-
-        @font-face {
-            font-family: "JetBrainsMono";
-            src: url("../fonts/JetBrainsMono.ttf");
-        }
-
-        :root {
-            --text-color: #000000;
-            --text-color-75: rgba(0, 0, 0, 0.5);
-            --text-color-50: rgba(0, 0, 0, 0.35);
-            --text-color-25: rgba(0, 0, 0, 0.1);
-        }
-
-        .errorMain {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            height: 80%;
-            padding: 40px;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .errorMain h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .errorMain p {
-            font-size: 15px;
-        }
-
-        .errorMain code {
-            font-family: JetBrainsMono;
-            font-size: 12px;
-            font-weight: 150;
-            position: fixed;
-            bottom: 40px;
-            opacity: 0.5;
-        }
-
-        .errorMain button {
-            padding: 5px 12px 6px 10px;
-            background: transparent;
-            border-radius: 6px;
-            border: solid 1px var(--text-color-25);
-            border-bottom: solid 2px var(--text-color-25);
-            font-size: 14px;
-            transition: all 0.15s ease-in-out;
-            user-select: none;
-            margin-top: 20px;
-        }
-
-        .errorMain button:hover {
-            background: var(--text-color-25);
-            border: solid 1px var(--text-color-50);
-            border-bottom: solid 2px var(--text-color-50);
-        }
-
-        .errorMain a {
-            text-decoration: none;
-        }
-    </style>
-    <div id="tab-contents">
-        <div class="errorMain">
-            <h1>Oops!</h1>
-            <h2>糟糕！没找到你想要访问的页面！</h2>
-            <p>你想找的那个页面可能不在这里，或者名字不对，请再试一下吧。</p>
-            <a href="./index.html">
-                <button>
-                    回到首页
-                </button>
-            </a>
-            <code>404 Not Found</code>
+<body style="opacity: 1;">
+    <h1>
+        <div>
+            <h1 style="opacity: 0.5;">ERROR</h1>
+            <h1 style="opacity: 1; color: var(--text-color-uni)">4O4</h1>
         </div>
-    </div>
-
+        <div style="opacity: 0.5;">
+            <span>NOT</span>
+            <span>FOUND</span>
+        </div>
+    </h1>
+    <main>
+        <p>hmm...
+            <br><span>看起来，你要找的页面好像走丢了</span>
+        </p>
+        <twinkle-button onclick="goHome()">回到首页</twinkle-button>
+    </main>
+    <script src="./index/javascript/functions.js"></script>
+    <script>
+        function goHome() {
+            setTimeout(() => {
+                const body = document.querySelector('body');
+                body.style.opacity = '0';
+            }, 300);
+            setTimeout(() => {
+                window.location.replace(window.location.origin);
+            }, 500);
+        }
+    </script>
 
 </body>
-<script>
-    // function reloadEditor() {
-    //     window.location.href = "index.html";
-    // }
-</script>
 
 </html>
