@@ -7,8 +7,21 @@
     <title>出错啦 - twinkle 工具集</title>
 </head>
 
-<body style="opacity: 1;">
+<body style="opacity: 0;" onload="showBody()">
     <style>
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #262626;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #F4F3F3;
+            }
+        }
+
         h1 {
             margin: 0;
             font-size: 128px;
@@ -87,8 +100,8 @@
         univar.rel = "stylesheet";
         univar.type = "text/css";
         univar.href = `${link}/index/style/univar.css`;
-        webicon.rel = "stylesheet";
-        webicon.type = "text/css";
+        webicon.rel = "icon";
+        webicon.type = "image/png";
         webicon.href = `${link}/icon.png`;
 
         head.appendChild(univar);
@@ -98,6 +111,10 @@
         script.type = "text/javascript";
         script.src = `${link}/index/javascript/functions.js`;
         head.appendChild(script);
+
+        function showBody() {
+            document.body.style.opacity = '1';
+        }
 
         function goHome() {
             setTimeout(() => {
