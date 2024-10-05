@@ -60,6 +60,7 @@
         p {
             color: var(--text-color-uni-50);
             user-select: none;
+            margin: 0;
         }
 
         p span {
@@ -67,10 +68,21 @@
             user-select: none;
             font-weight: 500;
             font-size: 20px;
+            margin-left: -1px;
         }
 
         main {
             padding: 16px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        icon {
+            font-family: "SegoeFlunetIcons";
+            font-size: 13px;
+            margin-top: 4px;
         }
     </style>
 
@@ -85,10 +97,12 @@
         </div>
     </h1>
     <main>
-        <p>hmm...
+        <p>oops!
             <br><span>看起来，你要找的页面好像走丢了</span>
         </p>
-        <twinkle-button onclick="goHome()">回到首页</twinkle-button>
+        <twinkle-button onclick="goHome()">
+            <icon></icon>回到首页
+        </twinkle-button>
     </main>
 
     <script>

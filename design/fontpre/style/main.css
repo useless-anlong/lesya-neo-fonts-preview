@@ -5,6 +5,7 @@
         --text-color-50: rgba(255, 255, 255, 0.5);
         --text-color-25: rgba(255, 255, 255, 0.25);
         --color-bg: #262626;
+        --backicon-border-color: #a19565;
         --backicon-bg: #D6C47A;
         --backicon-color: #fff9e8;
     }
@@ -17,9 +18,15 @@
         --text-color-50: rgba(0, 0, 0, 0.35);
         --text-color-25: rgba(0, 0, 0, 0.1);
         --color-bg: #F4F3F3;
-        --backicon-bg: #D6C47A;
-        --backicon-color: #fff9e8;
+        --backicon-bg: #fce99e;
+        --backicon-border-color: #baad79;
+        --backicon-color: #000000;
     }
+}
+
+back-to-home {
+    width: 52px;
+    height: 32px;
 }
 
 body {

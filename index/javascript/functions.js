@@ -53,16 +53,19 @@ class BackToHome extends HTMLElement {
                 padding: 0px;
                 height: 32px;
                 width: 52px;
-                transition: background 0.25s ease-in-out;
+                transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
                 background: unset;
                 border-radius: 6px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                box-sizing: border-box;
+                border: solid 1px transparent;
             }
 
             button:hover {
                 background: var(--backicon-bg, currentColor);
+                border: solid 1px var(--backicon-border-color, currentColor);
             }
 
             button:hover #backicon {
