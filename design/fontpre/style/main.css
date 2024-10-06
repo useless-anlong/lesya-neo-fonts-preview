@@ -218,8 +218,18 @@ body {
     outline: none;
 }
 
+#testText::selection {
+    background: unset;
+    text-decoration: underline 2px var(--text-color-50);
+}
+
 #font-info {
     margin-top: -48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
 }
 
 #fontFeatures {
@@ -272,6 +282,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+
+#sizeTestText::selection {
+    background: unset;
+    text-decoration: underline 2px var(--text-color-50);
 }
 
 /* 对比字号特殊样式 */
@@ -983,17 +998,57 @@ p#title {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    font-family: 'JetBrainsMono', var(--font-family-default);
+    font-family: var(--font-family-default);
     font-size: 14px;
     font-weight: 400;
-    line-height: 25px;
+    line-height: 26px;
 }
 
-#font-info code span, .variableInfoBox span {
+#font-info code div::selection {
+    background: unset;
+    text-decoration: underline 2px var(--text-color-50);
+}
+
+#font-info code span,
+.variableInfoBox span {
     width: 84px;
     min-width: 84px;
     font-weight: 300;
     opacity: 0.75;
+    font-size: 14px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#font-info code div a {
+    font-family: 'JetBrainsMono';
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-left: 24px;
+    text-decoration: unset;
+    transition: all 0.15s ease-in-out;
+    opacity: 0.75;
+    user-select: none;
+}
+
+#font-info code div a:hover {
+    opacity: 1;
+}
+
+#font-info code div a::before {
+    font-family: "SegoeFlunetIcons";
+    content: '';
+    font-size: 14px;
+    margin-right: 6px;
+    margin-left: -20px;
+    transform: translateY(0.75px) rotate(45deg);
+    position: absolute;
 }
 
 .variableInfoBox {
@@ -1212,7 +1267,7 @@ details {
     top: 0;
     z-index: 1024;
     width: 300px;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 98px);
     padding: 20px;
     padding-right: 40px;
     border-right: solid 0px var(--text-color-25);

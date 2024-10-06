@@ -18,14 +18,20 @@ function start(element) {
     titleElement.style.opacity = '0';
 
     setTimeout(() => {
-        // window.location.href = `${href}${classify}/${id}/`;
-        window.location.replace(`${href}${classify}/${id}/`);
+        var hasTrailingSlash = /\/$/.test(href);
+
+        if (hasTrailingSlash) {
+            window.location.replace(`${href}${classify}/${id}/`);
+        } else {
+            window.location.replace(`${href}/${classify}/${id}/`);
+        }
     }, 400);
 }
 
 const titleContent = {
     'fontpre': '<h2>不仅可以预览字体，<br>还能浏览、测试字体特性、可变属性。</h2>',
-    'palettepad': '<h2>取你想要的色，<br>并获取颜色的 HEX、RGB、HSL、HSB 色值。</h2>'
+    'palettepad': '<h2>取你想要的色，<br>并获取颜色的 HEX、RGB、HSL、HSB 色值。</h2>',
+    'svgEditior': '<h2>编辑 SVG 代码，<br>或者试一试、看一看 SVG 在 Web 上的实际表现。</h2>'
 }
 
 // 获取所有toolShortcut类的li元素

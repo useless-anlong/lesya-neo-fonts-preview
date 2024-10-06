@@ -149,7 +149,8 @@ const featureDescriptions = {
     'hlig': '历史连字',
     'clig': '上下文连字',
     'smcp': '小型大写字母',
-    'c2sc': '从大写字母转换的小型大写字母',
+    'c2sc': '大写转小型大写字母',
+    'c2pc': '大写转小写字母',
     'case': '区分大小写形式',
     'cpsp': '大写字母间距',
     'frac': '分数',
@@ -194,7 +195,8 @@ const featureDescriptions = {
     'vert': '竖排书写',
     'SRIF': '衬线',
     'srif': '衬线',
-    'ccmp': '字形合成 / 分解'
+    'ccmp': '字形合成 / 分解',
+    'rvrn': '必需的变体替代项'
 };
 
 fontFile.addEventListener('change', (e) => {
@@ -280,16 +282,97 @@ function toggleDetails(element) {
 
 function copyContent(element) {
     const textToCopy = element.textContent;
-    const textarea = document.createElement('textarea');
-    textarea.value = textToCopy;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
+    // const textarea = document.createElement('textarea');
+    // textarea.value = textToCopy;
+    // document.body.appendChild(textarea);
+    // textarea.select();
+    // document.execCommand('copy');
+    // document.body.removeChild(textarea);
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        dialog.id = 'done';
+        dialog.innerHTML = `<p>已将 <code>${texttextToCopy}</code> 复制到剪贴板</p>`
+        body.appendChild(dialog);
+        setTimeout(() => {
+            dialog.remove();
+        }, 5500);
+    }).catch(err => {
+        dialog.id = 'error';
+        dialog.innerHTML = `<p>复制时出现错误: <code>${err}</code></p>`
+        body.appendChild(dialog);
+        setTimeout(() => {
+            dialog.remove();
+        }, 5500);
+    });
 }
 
+// function copyContent(text) {
+//     const dialog = document.createElement('div');
+//     const body = document.querySelector('body');
+//     dialog.className = 'dialog';
+
+//     navigator.clipboard.writeText(text).then(() => {
+//         dialog.id = 'done';
+//         dialog.innerHTML = `<p>已将 <code>${text}</code> 复制到剪贴板</p>`
+//         body.appendChild(dialog);
+//         setTimeout(() => {
+//             dialog.remove();
+//         }, 5500);
+//     }).catch(err => {
+//         dialog.id = 'error';
+//         dialog.innerHTML = `<p>复制时出现错误: <code>${err}</code></p>`
+//         body.appendChild(dialog);
+//         setTimeout(() => {
+//             dialog.remove();
+//         }, 5500);
+//     });
+// }
+
+// function copyContent(input) {
+//     const dialog = document.createElement('div');
+//     const body = document.querySelector('body');
+//     dialog.className = 'dialog';
+
+//     // 判断输入是元素还是文本
+//     const textToCopy = typeof input === 'string' ? input : input.textContent;
+
+//     navigator.clipboard.writeText(textToCopy).then(() => {
+//         dialog.id = 'done';
+//         dialog.innerHTML = `<p>已将 <code>${textToCopy}</code> 复制到剪贴板</p>`;
+//         body.appendChild(dialog);
+//         setTimeout(() => {
+//             dialog.remove();
+//         }, 5500);
+//     }).catch(err => {
+//         dialog.id = 'error';
+//         dialog.innerHTML = `<p>复制时出现错误: <code>${err}</code></p>`;
+//         body.appendChild(dialog);
+//         setTimeout(() => {
+//             dialog.remove();
+//         }, 5500);
+//     });
+// }
+
 function copyTextToClipboard(element) {
-    const textToCopy = element.textContent;
+    let textToCopy = '';
+    const links = element.querySelectorAll('a');
+
+    if (links.length > 0) {
+        // 如果有链接，使用原始文本重建内容
+        let lastIndex = 0;
+        element.innerHTML.replace(/<a[^>]+data-original="([^"]+)"[^>]*>.*?<\/a>/g, (match, original, index) => {
+            textToCopy += element.innerHTML.slice(lastIndex, index) + original;
+            lastIndex = index + match.length;
+        });
+        textToCopy += element.innerHTML.slice(lastIndex);
+
+        // 移除所有HTML标签
+        textToCopy = textToCopy.replace(/<[^>]+>/g, '');
+    } else {
+        // 如果没有链接，直接使用文本内容
+        textToCopy = element.textContent;
+    }
+
     const textarea = document.createElement('textarea');
     textarea.value = textToCopy;
     document.body.appendChild(textarea);
@@ -306,14 +389,33 @@ async function loadFontInfo(file) {
         let info = '';
 
         const nameTable = font.tables.name;
+
+        const copyrightLink = nameTable.copyright.en;
+
+        // 改进的URL正则表达式，包括可能的括号
+        const urlRegex = /(\()?(\bhttps?:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])(\))?/gi;
+
+        const htmlText = copyrightLink.replace(urlRegex, (match, openParen, url, closeParen) => {
+            // 提取域名
+            const domain = new URL(url).hostname.toUpperCase();
+
+            // 如果存在括号，则在链接外部添加括号
+            const prefix = openParen ? '(' : '';
+            const suffix = closeParen ? ')' : '';
+
+            // 在data-original属性中存储原始URL
+            return `${prefix}<a href="${url}" target="_blank" data-original="${match}">${domain}</a>${suffix}`;
+        });
+
         info += `<div class="info-title"><h3>${nameTable.fontFamily.en || '未知'}</h3><span>字体详细信息 (轻点任意一项以复制)</span></div>`;
         info += `<code><span>全名</span><div onclick="copyTextToClipboard(this)">${nameTable.fullName.en || '未知'}</div></code>`;
         info += `<code><span>子系列名称</span><div onclick="copyTextToClipboard(this)">${nameTable.fontSubfamily.en || '未知'}</div></code>`;
         info += `<code><span>字体版本</span><div onclick="copyTextToClipboard(this)">${nameTable.version.en || '未知'}</div></code>`;
-        info += `<code><span>版权</span><div onclick="copyTextToClipboard(this)">${nameTable.copyright.en || '未知'}</div></code>`;
+        info += `<code><span>版权</span><div onclick="copyTextToClipboard(this)">${htmlText || '未知'}</div></code>`;
+        // info += `<code><span>版权</span><div onclick="copyTextToClipboard(this)">${nameTable.copyright.en || '未知'}</div></code>`;
         info += `<code><span>设计师</span><div onclick="copyTextToClipboard(this)">${nameTable.designer.en || '未知'}</div></code>`;
         info += `<code><span>供应商</span><div onclick="copyTextToClipboard(this)">${nameTable.manufacturer.en || '未知'}</div></code>`;
-        
+
         const weightClass = font.tables.os2.usWeightClass;
         let weightName;
 

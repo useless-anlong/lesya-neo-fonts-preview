@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG 编辑器 - twinkle 工具集</title>
+    <link rel="stylesheet" type="text/css" href="./style/main.css">
+    <link rel="icon" type="image/png" href="./style/icon.png">
+    <link rel="stylesheet" type="text/css" href="../../index/style/univar.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: calc(100vh - 64px);
+            flex-direction: column;
+            margin-bottom: 64px;
+        }
+
+        :root {
+            --backicon-border-color: transition;
+            --backicon-bg: var(--card-background);
+            --backicon-color: var(--text-color-uni);
+        }
+
+        #editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            width: 50vw;
+        }
+
+        #editor {
+            flex: 1;
+            font-size: 14px;
+            resize: none;
+            padding: 10px;
+            border: none;
+            outline: none;
+            background: var(--main-background);
+            color: var(--text-color-uni);
+            white-space: nowrap;
+            font-family: JetBrains Mono, var(--font-family-default);
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        #preview {
+            flex: 1;
+            /* border: 1px solid #ccc; */
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            width: calc(50vw - 16px);
+            height: calc(100vh - 64px);
+            top: 0;
+            right: 0;
+            background-color: var(--display-background);
+            border-left: solid 1px var(--card-background);
+        }
+
+        #toolbar {
+            background-color: var(--card-background);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            width: 58px;
+            height: 36px;
+            /* margin-right: 10px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--on-card-background);
+            border: unset;
+            border-radius: 6px;
+        }
+
+        li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .line-numbers {
+            width: 40px;
+            overflow: hidden;
+            background-color: var(--display-background);
+            text-align: right;
+            padding: 10px 5px;
+            color: var(--text-color-uni-50);
+            font-size: 14px;
+            font-family: JetBrains Mono;
+            line-height: 20px;
+            font-weight: 300;
+            user-select: none;
+        }
+
+        footer {
+            width: calc(100vw - 32px);
+            position: fixed;
+            background-color: var(--display-background);
+            bottom: 0;
+            left: 0;
+            -webkit-app-region: drag;
+            justify-content: space-between;
+            flex-direction: row;
+            padding: 16px;
+            align-items: center;
+            z-index: 2096;
+            transition: all 0.2s ease-in-out 0.35s;
+            display: flex;
+            gap: 12px;
+            border-top: solid 1px var(--card-background);
+        }
+
+        p#title {
+            margin: 0;
+            font-size: 14px;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color-uni);
+            margin-bottom: 2px;
+            font-family: var(--font-family-default);
+        }
+
+        .footerItemBtn {
+            height: 32px;
+            width: max-content;
+            transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+            background: unset;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: "SegoeFlunetIcons";
+            user-select: none;
+            color: var(--backicon-color);
+            font-size: 14px;
+            gap: 8px;
+            padding: 4px 8px;
+        }
+
+        .footerItemBtn:hover {
+            background: var(--backicon-bg);
+        }
+
+        .footerItemBox {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footerItemBox span {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #highlight-icon {
+            fill: #FFB578;
+        }
+
+        #default-icon {
+            fill: var(--text-color-uni);
+        }
+
+        #formatCode #highlight-icon,
+        #formatCode #default-icon {
+            transform: translateX(0px);
+            transition: all 0.1s ease-in-out;
+        }
+
+        #formatCode:active #highlight-icon {
+            transform: translateX(-1.5px);
+        }
+
+        #formatCode:active #default-icon {
+            transform: translateX(1.5px);
+        }
+
+        #saveSVGToFile #highlight-icon,
+        #saveSVGToFile #default-icon {
+            transform: translateY(0px);
+            transition: all 0.1s ease-in-out;
+        }
+
+        #saveSVGToFile:active #highlight-icon {
+            transform: translateY(1.5px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editor-container">
+        <div style="position: relative; flex: 1; display: flex; margin-bottom: 96px; top: 32px;">
+            <div class="line-numbers" id="line-numbers"></div>
+            <textarea id="editor" oninput="updatePreview()" spellcheck="false"></textarea>
+        </div>
+        <div id="preview"></div>
+    </div>
+    <footer style="opacity: 1; bottom: 0px;">
+        <div class="footerItemBox">
+            <back-to-home></back-to-home>
+            <img width="20" height="20" src="./style/icon.png">
+            <p id="title">SVG 编辑器</p>
+        </div>
+        <div class="footerItemBox">
+            <button class="footerItemBtn" id="saveSVGToFile" onclick="saveSVGToFile()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20"
+                    height="20" viewBox="0 0 20 20" fill="none">
+                    <defs>
+                        <clipPath id="cut-off">
+                            <rect x="4" y="9" width="12" height="9"></rect>
+                        </clipPath>
+                    </defs>
+                    <path clip-path="url(#cut-off)" id="highlight-icon"
+                        d="M13.7543 10L6.25433 10C6.00768 10 5.77569 10.0451 5.55433 10.14C5.33297 10.2349 5.13192 10.3724 4.96433 10.54C4.79674 10.7076 4.66919 10.8986 4.57433 11.12C4.47946 11.3414 4.43433 11.5733 4.43433 11.82L4.43433 17.29L5.64433 17.29L5.64433 11.82C5.64433 11.6556 5.70418 11.5102 5.82433 11.39C5.94449 11.2698 6.08989 11.21 6.25433 11.21L13.7543 11.21C13.9187 11.21 14.0641 11.2698 14.1843 11.39C14.3045 11.5102 14.3643 11.6556 14.3643 11.82L14.3643 17.29L15.5743 17.29L15.5743 11.82C15.5743 11.5733 15.5292 11.3414 15.4343 11.12C15.3395 10.8986 15.2119 10.7076 15.0443 10.54C14.8767 10.3724 14.6757 10.2349 14.4543 10.14C14.2329 10.0451 14.001 10 13.7543 10Z"
+                        fill="#CCCCCC">
+                    </path>
+                    <path id="default-icon"
+                        d="M13.49 1.5L3.88 1.5C3.55114 1.5 3.24777 1.56719 2.96 1.7C2.67224 1.83281 2.41502 2.00865 2.2 2.23C1.98497 2.45136 1.81649 2.70591 1.69 3C1.56351 3.29408 1.5 3.60746 1.5 3.93L1.5 16.12C1.5 16.4488 1.56719 16.7522 1.7 17.04C1.83281 17.3278 2.00865 17.585 2.23 17.8C2.45136 18.015 2.70591 18.1835 3 18.31C3.29408 18.4365 3.60746 18.5 3.93 18.5L16.07 18.5C16.3988 18.5 16.7522 18.4328 17.04 18.3C17.3278 18.1672 17.585 17.9914 17.8 17.77C18.015 17.5487 18.1835 17.2941 18.31 17C18.4365 16.7059 18.5 16.3926 18.5 16.07L18.5 6.51C18.5 6.18745 18.4433 5.87725 18.32 5.58C18.1967 5.28275 18.0177 5.01768 17.79 4.79L15.21 2.21C14.9824 1.98232 14.7172 1.80333 14.42 1.68C14.1227 1.55668 13.8125 1.5 13.49 1.5ZM12.43 2.71L6.36 2.71L6.36 5.75C6.36 5.91444 6.41984 6.05984 6.54 6.18C6.66016 6.30015 6.79555 6.36 6.96 6.36L11.82 6.36C11.9845 6.36 12.1299 6.30015 12.25 6.18C12.3702 6.05984 12.43 5.91444 12.43 5.75L12.43 2.71ZM5.14 2.71L3.93 2.71C3.75924 2.71 3.59547 2.74676 3.45 2.81C3.30453 2.87324 3.18067 2.95933 3.07 3.07C2.95933 3.18067 2.87324 3.30453 2.81 3.45C2.74676 3.59547 2.71 3.75924 2.71 3.93L2.71 16.07C2.71 16.2408 2.74676 16.4014 2.81 16.55C2.87324 16.6986 2.96248 16.8225 3.07 16.93C3.17752 17.0375 3.30138 17.1268 3.45 17.19C3.59861 17.2533 3.75924 17.29 3.93 17.29L16.07 17.29C16.2397 17.29 16.4053 17.2529 16.55 17.19C16.6954 17.1268 16.8193 17.0406 16.93 16.93C17.0406 16.8193 17.1268 16.6954 17.19 16.55C17.2533 16.4045 17.29 16.2408 17.29 16.07L17.29 6.51C17.29 6.16848 17.164 5.88399 16.93 5.65L14.35 3.07C14.1539 2.87395 13.9182 2.75163 13.64 2.72L13.64 5.75C13.64 5.99665 13.5948 6.22864 13.5 6.45C13.4051 6.67136 13.2776 6.87241 13.11 7.04C12.9424 7.20759 12.7414 7.33513 12.52 7.43C12.2987 7.52487 12.0667 7.57 11.82 7.57L6.96 7.57C6.71334 7.57 6.48136 7.52487 6.26 7.43C6.03864 7.33513 5.84759 7.20759 5.68 7.04C5.51241 6.87241 5.38486 6.67136 5.29 6.45C5.19513 6.22864 5.14 5.99665 5.14 5.75L5.14 2.71Z"
+                        fill-rule="evenodd" fill="#000000">
+                    </path>
+                </svg>
+                <p id="title" style="gap: 5px;">保存至本地<span style="gap: 2px;">(<u>S</u>)</span></p>
+            </button>
+            <button class="footerItemBtn" id="formatCode" onclick="formatCode()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20"
+                    height="20" viewBox="0 0 20 20" fill="none">
+                    <path id="default-icon"
+                        d="M2.75 5.93012C2.75 5.77777 2.80868 5.65144 2.92 5.54012C3.03132 5.42879 3.15765 5.37012 3.31 5.37012L15.33 5.37012L11.79 1.83012C11.6787 1.71879 11.62 1.58246 11.62 1.43012C11.62 1.27777 11.6787 1.15145 11.79 1.04012C11.9013 0.928789 12.0377 0.870117 12.19 0.870117C12.3424 0.870117 12.4687 0.928789 12.58 1.04012L17.06 5.51012C17.1245 5.57458 17.1678 5.63566 17.2 5.70012C17.2322 5.76458 17.25 5.84223 17.25 5.93012C17.25 6.01801 17.2322 6.09566 17.2 6.16012C17.1678 6.22458 17.1245 6.28566 17.06 6.35012L12.58 10.8301C12.4687 10.9414 12.3424 11.0001 12.19 11.0001C12.0377 11.0001 11.9013 10.9414 11.79 10.8301C11.6787 10.7188 11.62 10.5825 11.62 10.4301C11.62 10.2778 11.6787 10.1514 11.79 10.0401L15.33 6.50012L3.31 6.50012C3.15765 6.50012 3.03132 6.44144 2.92 6.33012C2.80868 6.21879 2.75 6.08247 2.75 5.93012Z">
+                    </path>
+                    <path id="highlight-icon"
+                        d="M17.25 14.06C17.25 13.9076 17.1913 13.7813 17.08 13.67C16.9687 13.5587 16.8424 13.5 16.69 13.5L4.67 13.5L8.21 9.96C8.32132 9.84867 8.38 9.71234 8.38 9.56C8.38 9.40766 8.32132 9.28133 8.21 9.17C8.09868 9.05867 7.96235 9 7.81 9C7.65765 9 7.53132 9.05867 7.42 9.17L2.94 13.64C2.87554 13.7045 2.83222 13.7655 2.8 13.83C2.76778 13.8945 2.75 13.9721 2.75 14.06C2.75 14.1479 2.76778 14.2255 2.8 14.29C2.83222 14.3545 2.87554 14.4155 2.94 14.48L7.42 18.96C7.53132 19.0713 7.65765 19.13 7.81 19.13C7.96235 19.13 8.09868 19.0713 8.21 18.96C8.32132 18.8487 8.38 18.7123 8.38 18.56C8.38 18.4076 8.32132 18.2813 8.21 18.17L4.67 14.63L16.69 14.63C16.8424 14.63 16.9687 14.5713 17.08 14.46C17.1913 14.3487 17.25 14.2123 17.25 14.06Z">
+                    </path>
+                </svg>
+                <p id="title">格式化文档</p>
+            </button>
+        </div>
+    </footer>
+    <script src="./javascript/main.js"></script>
+    <script src="../../index/javascript/functions.js"></script>
+</body>
+
+</html>

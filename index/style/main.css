@@ -249,7 +249,7 @@ span.emoji {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     align-content: flex-start;
     gap: 8px;
@@ -456,7 +456,7 @@ span.tipsText {
 #nextBtn {
     font-family: "SegoeFlunetIcons";
     background-color: transparent;
-    color: white;
+    color: var(--text-color-uni-50);
     border: none;
     font-size: 18px;
     padding: 8px;
@@ -477,12 +477,14 @@ span.tipsText {
 }
 
 #nextBtn:hover {
+    color: var(--text-color-uni);
     opacity: 0.75;
     right: 0px;
 }
 
 #prevBtn:hover {
     left: 0px;
+    color: var(--text-color-uni);
     opacity: 0.75;
 }
 
